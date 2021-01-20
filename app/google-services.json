@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "159005546996",
+    "firebase_url": "https://smieciolapp.firebaseio.com",
+    "project_id": "smieciolapp",
+    "storage_bucket": "smieciolapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:159005546996:android:117e2edf228b2722ec41a1",
+        "android_client_info": {
+          "package_name": "com.smieciolapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "159005546996-o232580r3l87t4a6q29oavpljjete857.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smieciolapp",
+            "certificate_hash": "65998bf509ce5742063e9254aac69a3fbadc028f"
+          }
+        },
+        {
+          "client_id": "159005546996-p0nveja2nkeoioa018r2ed9bf8eof3l4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcPQfmbAuB6nYmNIjMYVDmI27k2s0kn10"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "159005546996-p0nveja2nkeoioa018r2ed9bf8eof3l4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

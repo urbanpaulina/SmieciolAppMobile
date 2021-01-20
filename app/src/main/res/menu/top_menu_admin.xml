@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view2"
+    android:checkableBehavior="single">
+    <item
+        android:id="@+id/Profile_Uzytkownikow"
+        android:fontFamily="sans-serif-black"
+        android:icon="@drawable/home_icon"
+        android:textColor="#2D2B2B"
+        android:title="Profile Użytkowników" />
+
+    <item
+        android:id="@+id/Profil"
+        android:fontFamily="sans-serif-black"
+        android:icon="@drawable/home_icon"
+        android:textColor="#2D2B2B"
+        android:title="Mój profil" />
+
+    <item
+        android:id="@+id/wyloguj"
+        android:fontFamily="sans-serif-black"
+        android:icon="@drawable/home_icon"
+        android:textColor="#2D2B2B"
+        android:title="Wyloguj" />
+</menu>

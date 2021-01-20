@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    android:checkableBehavior="single">
+    <item
+        android:id="@+id/glowna"
+        android:fontFamily="sans-serif-black"
+        android:icon="@drawable/home_icon"
+        android:textColor="#2D2B2B"
+        android:title="Strona główna" />
+
+    <item
+        android:id="@+id/skanuj_paragon"
+        android:fontFamily="sans-serif-black"
+        android:icon="@drawable/home_icon"
+        android:textColor="#2D2B2B"
+        android:title="Skanuj paragon" />
+    <item
+        android:id="@+id/moje_zakupy"
+        android:fontFamily="sans-serif-black"
+        android:icon="@drawable/home_icon"
+        android:textColor="#2D2B2B"
+        android:title="Moje zakupy" />
+    <item
+        android:id="@+id/dodaj_produkt"
+        android:fontFamily="sans-serif-black"
+        android:icon="@drawable/home_icon"
+        android:textColor="#2D2B2B"
+        android:title="Dodaj produkt" />
+    <item
+        android:id="@+id/grupy"
+        android:fontFamily="sans-serif-black"
+        android:icon="@drawable/home_icon"
+        android:textColor="#2D2B2B"
+        android:title="Moje grupy" />
+
+</menu>
