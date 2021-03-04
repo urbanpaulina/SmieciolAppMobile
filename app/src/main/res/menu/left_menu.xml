@@ -4,35 +4,35 @@
     tools:showIn="navigation_view"
     android:checkableBehavior="single">
     <item
-        android:id="@+id/glowna"
+        android:id="@+id/MainPage"
         android:fontFamily="sans-serif-black"
         android:icon="@drawable/home_icon"
         android:textColor="#2D2B2B"
         android:title="Strona główna" />
 
     <item
-        android:id="@+id/skanuj_paragon"
+        android:id="@+id/Scan_Recipt"
         android:fontFamily="sans-serif-black"
         android:icon="@drawable/home_icon"
         android:textColor="#2D2B2B"
         android:title="Skanuj paragon" />
     <item
-        android:id="@+id/moje_zakupy"
+        android:id="@+id/My_Shoppings"
         android:fontFamily="sans-serif-black"
         android:icon="@drawable/home_icon"
         android:textColor="#2D2B2B"
         android:title="Moje zakupy" />
     <item
-        android:id="@+id/dodaj_produkt"
+        android:id="@+id/Add_Product"
         android:fontFamily="sans-serif-black"
         android:icon="@drawable/home_icon"
         android:textColor="#2D2B2B"
         android:title="Dodaj produkt" />
     <item
-        android:id="@+id/grupy"
+        android:id="@+id/Ranking"
         android:fontFamily="sans-serif-black"
         android:icon="@drawable/home_icon"
         android:textColor="#2D2B2B"
-        android:title="Moje grupy" />
+        android:title="Ranking" />
 
 </menu>

@@ -1,4 +1,4 @@
-package com.smieciolapp;
+package com.smieciolapp.ViewModel;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -38,6 +38,7 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
+import com.smieciolapp.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -49,7 +50,7 @@ import java.util.Objects;
 import static android.app.Activity.RESULT_OK;
 import static android.widget.Toast.LENGTH_SHORT;
 
-public class scan extends Fragment {
+public class ScanProductsPage extends Fragment {
 
     ImageView imageView;
     Button takePic;

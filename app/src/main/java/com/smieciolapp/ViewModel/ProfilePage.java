@@ -1,4 +1,4 @@
-package com.smieciolapp;
+package com.smieciolapp.ViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +18,19 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.smieciolapp.R;
+import com.smieciolapp.autentication.FirebaseAuthClass;
 import com.smieciolapp.data.model.User;
 
-import java.util.Objects;
-
-public class profil extends AppCompatActivity {
+public class ProfilePage extends AppCompatActivity {
 
     TextView fName, sName, uName, Email;
-    User user;
-    FirebaseFirestore db;
+
+    FirebaseAuthClass authClass = new FirebaseAuthClass();
+
+    //obecnie zalogowany user
+    User user = new User();
+
     RecyclerView recyclerView;
     FirestoreRecyclerAdapter adapter;
 
@@ -38,11 +41,11 @@ public class profil extends AppCompatActivity {
         //pobranie usera z inteta
         Intent intent = getIntent();
         user = (User) intent.getSerializableExtra("user");
-        db = FirebaseFirestore.getInstance();
+
 
         // jesli user zalogowany nie jako admin to ...
-       if(user!=null && !user.getUserName().equals("admin")) {
-           setContentView(R.layout.activity_profil);
+       if(user != null && user.getType()==2) {
+           setContentView(R.layout.activity_profile);
 
            fName = findViewById(R.id.firstname);
            sName = findViewById(R.id.lastname);
@@ -54,13 +57,15 @@ public class profil extends AppCompatActivity {
            uName.setText(user.getUserName());
            Email.setText(user.getEmail());
 
-           // jesli admin ...
-       } else if(user!=null && user.getUserName().equals("admin")){
-           setContentView(R.layout.activity_profil_admin);
+
+       }
+       // jesli admin ...
+       else if(user!=null && user.getType()==1){
+           setContentView(R.layout.activity_profile_admin);
 
            recyclerView = findViewById(R.id.viewer);
 
-           Query query = db.collection("users");
+           Query query = authClass.getDb().collection("users");
            FirestoreRecyclerOptions<User> options = new FirestoreRecyclerOptions.Builder<User>()
                                                         .setQuery(query,User.class).build();
            adapter = new FirestoreRecyclerAdapter<User,UserViewHolder>(options){
@@ -84,7 +89,7 @@ public class profil extends AppCompatActivity {
                    btn.setOnClickListener(new View.OnClickListener() {
                        @Override
                        public void onClick(View v) {
-                           Intent intent = new Intent(profil.this, profil.class);
+                           Intent intent = new Intent(ProfilePage.this, ProfilePage.class);
                            intent.putExtra("user",model);
                            startActivity(intent);
                        }

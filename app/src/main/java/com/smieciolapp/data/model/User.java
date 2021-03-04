@@ -8,14 +8,16 @@ public class User implements Serializable {
     private String userName;
     private String email;
     private String password;
+    private int type;
 
 
-    public User(String firstName, String lastName, String userName, String email, String password) {
+    public User(String firstName, String lastName, String userName, String email, String password, int type) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.email = email;
         this.password = password;
+        this.type = type;
     }
 
     public User() {
@@ -24,6 +26,7 @@ public class User implements Serializable {
         this.userName="";
         this.email="";
         this.password="";
+        this.type=0;
     }
 
     public String getFirstName() {
@@ -66,6 +69,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -74,6 +85,7 @@ public class User implements Serializable {
                 ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", type ='" + type + '\'' +
                 '}';
     }
 }
