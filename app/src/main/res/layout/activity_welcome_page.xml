@@ -6,56 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".ViewModel.WelcomePage">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="367dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Witaj w aplikacji Śmiecioł"
+        android:textAlignment="center"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="367dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="200dp"
-            android:text="Witaj w aplikacji Śmiecioł"
-            android:textAlignment="center"
-            android:textSize="36sp" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Kliknij aby się zarejestrować"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/btnId"
+        tools:layout_editor_absoluteX="0dp" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Kliknij aby się zalogować"
-            android:textAlignment="center" />
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Kliknij aby się zalogować"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:layout_editor_absoluteX="0dp" />
 
-        <Button
-            android:id="@+id/btnId"
-            android:layout_width="173dp"
-            android:layout_height="69dp"
-            android:layout_marginLeft="120dp"
-            android:layout_marginTop="10dp"
-            android:text="Zaloguj" />
+    <Button
+        android:id="@+id/btnId"
+        android:layout_width="173dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="24dp"
+        android:text="Zaloguj"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Kliknij aby się zarejestrować"
-            android:textAlignment="center" />
-
-        <Button
-            android:id="@+id/registerId"
-            android:layout_width="136dp"
-            android:layout_height="59dp"
-            android:layout_marginTop="10dp"
-            android:text="Button" />
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/registerId"
+        android:layout_width="174dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="36dp"
+        android:text="Zarejestruj"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

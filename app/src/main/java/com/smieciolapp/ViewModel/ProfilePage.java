@@ -30,7 +30,7 @@ public class ProfilePage extends AppCompatActivity {
 
     //obecnie zalogowany user
     User user = new User();
-
+    boolean isAdmin = false;
     RecyclerView recyclerView;
     FirestoreRecyclerAdapter adapter;
 
@@ -38,14 +38,23 @@ public class ProfilePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         //pobranie usera z inteta
         Intent intent = getIntent();
         user = (User) intent.getSerializableExtra("user");
+        try{
+            isAdmin = (boolean) intent.getBooleanExtra("admin",false);
+        } catch (Exception e){
 
+        }
 
         // jesli user zalogowany nie jako admin to ...
        if(user != null && user.getType()==2) {
-           setContentView(R.layout.activity_profile);
+
+           if(!isAdmin)
+               setContentView(R.layout.activity_profile);
+           else
+               setContentView(R.layout.activity_profile_user_admin);
 
            fName = findViewById(R.id.firstname);
            sName = findViewById(R.id.lastname);
@@ -61,6 +70,7 @@ public class ProfilePage extends AppCompatActivity {
        }
        // jesli admin ...
        else if(user!=null && user.getType()==1){
+
            setContentView(R.layout.activity_profile_admin);
 
            recyclerView = findViewById(R.id.viewer);
@@ -75,6 +85,7 @@ public class ProfilePage extends AppCompatActivity {
                @Override
                public UserViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
                    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.model_viewer , parent, false);
+
                    return new UserViewHolder(view);
                }
 
@@ -82,8 +93,7 @@ public class ProfilePage extends AppCompatActivity {
                @Override
                protected void onBindViewHolder(@NonNull UserViewHolder holder, int position, @NonNull final User model) {
 
-                   holder.uName.setText(model.getUserName());
-                   System.out.println(model.getUserName());
+                   holder.userEmail.setText(model.getEmail());
 
                    Button btn = holder.itemView.findViewById(R.id.checkUser);
                    btn.setOnClickListener(new View.OnClickListener() {
@@ -91,11 +101,10 @@ public class ProfilePage extends AppCompatActivity {
                        public void onClick(View v) {
                            Intent intent = new Intent(ProfilePage.this, ProfilePage.class);
                            intent.putExtra("user",model);
+                           intent.putExtra("admin",true);
                            startActivity(intent);
                        }
                    });
-
-
                }
            };
 
@@ -110,11 +119,11 @@ public class ProfilePage extends AppCompatActivity {
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
-        TextView  uName;
+        TextView  userEmail;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
-            uName = itemView.findViewById(R.id.uName);
+            userEmail = itemView.findViewById(R.id.uName);
         }
     }
 
@@ -122,7 +131,7 @@ public class ProfilePage extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(user!=null && user.getUserName().equals("admin")) {
+        if(user!=null && user.getType()==1) {
             adapter.startListening();
         }
     }
@@ -130,7 +139,7 @@ public class ProfilePage extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if(user!=null && user.getUserName().equals("admin")) {
+        if(user!=null && user.getType()==1) {
             adapter.stopListening();
         }
     }

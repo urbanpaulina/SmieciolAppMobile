@@ -3,36 +3,118 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
     tools:context=".ViewModel.ScanProductsPage">
 
     <ImageView
         android:id="@+id/pictureTaken"
-        android:layout_width="331dp"
-        android:layout_height="347dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="262dp"
+        android:layout_height="253dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/takePhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Zrób zdjęcie"
+        android:layout_marginTop="20dp"
+        android:text="Zweryfikuj zakupy"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.967"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pictureTaken" />
+        app:layout_constraintTop_toBottomOf="@+id/sumOfPlasticWeight" />
 
     <TextView
         android:id="@+id/recognizedText"
-        android:layout_width="289dp"
-        android:layout_height="130dp"
+        android:layout_width="290dp"
+        android:layout_height="68dp"
+        android:text="rozpoznany text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/takePhoto" />
+        app:layout_constraintTop_toBottomOf="@+id/takePhoto"
+        app:layout_constraintVertical_bias="0.287" />
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="294dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="28dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Szukaj produktu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="298dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fillViewport="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/prodList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="212dp"
+        android:layout_height="275dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="24dp"
+        android:fillViewport="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/shoppingList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:text="Suma zakupionego plastiku:"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/scrollView3"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <TextView
+        android:id="@+id/sumOfPlasticWeight"
+        android:layout_width="175dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
