@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D1F8D1"
+    android:orientation="vertical"
+    tools:context=".ViewModel.AddProductAdmin">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#D1F8D1">
+
+        <TextView
+            android:id="@+id/txt_Name"
+            android:layout_width="212dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="179dp"
+            android:text="Nazwa"
+            android:textColor=" #000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.323"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="279dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="112dp"
+
+            android:inputType="text"
+            android:padding="10dp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.323"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_Name" />
+
+        <TextView
+            android:id="@+id/txtWeight"
+            android:layout_width="212dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="179dp"
+            android:text="Waga (kg)"
+            android:textColor=" #000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.323"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etName" />
+
+        <EditText
+            android:id="@+id/etWeight"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="245dp"
+
+            android:inputType="number"
+            android:padding="10dp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.305"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtWeight" />
+
+        <TextView
+            android:id="@+id/txtBarcode"
+            android:layout_width="212dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="179dp"
+            android:text="Kod kreskowy"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.323"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etWeight" />
+
+        <EditText
+            android:id="@+id/etBarcode"
+            android:layout_width="283dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="170dp"
+
+            android:inputType="number"
+            android:padding="10dp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.142"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtBarcode" />
+
+        <TextView
+            android:id="@+id/txtCategory"
+            android:layout_width="212dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="179dp"
+            android:text="Kategoria"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.32"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etBarcode" />
+
+        <EditText
+            android:id="@+id/etCategory"
+            android:layout_width="283dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="70dp"
+
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="112dp"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.37"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCategory" />
+
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="127dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="133dp"
+            android:layout_marginTop="164dp"
+            android:layout_marginEnd="151dp"
+            android:text="ADD"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+
+            android:textStyle="bold"
+            app:backgroundTint="#40CC52"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etBarcode" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

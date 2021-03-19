@@ -7,13 +7,15 @@ public class Product {
     private double weight;
     private boolean confirmed;
     private String barcode;
+    private String category;
 
-    public Product(String id, String name, double weight, boolean confirmed, String barcode) {
+    public Product(String id, String name, double weight, boolean confirmed, String barcode, String category) {
         this.id = id;
         this.name = name;
         this.weight = weight;
         this.confirmed = confirmed;
         this.barcode = barcode;
+        this.category = category;
     }
 
     public Product() {
@@ -22,6 +24,7 @@ public class Product {
         this.weight = 0.0;
         this.confirmed = false;
         this.barcode = "";
+        this.category = "";
     }
 
     public String getId() {
@@ -62,6 +65,12 @@ public class Product {
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
+    }
+
+    public String getCategory() { return category; }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     @Override
