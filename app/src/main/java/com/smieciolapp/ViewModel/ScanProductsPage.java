@@ -110,8 +110,6 @@ public class ScanProductsPage extends Fragment {
     ArrayAdapter<Product> shoppingAdapter;
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -154,7 +152,6 @@ public class ScanProductsPage extends Fragment {
                     } catch (Exception e) {
                         System.out.println("Nie dodano " + snapshot.getValue(Product.class));
                     }
-
                 }
             }
 

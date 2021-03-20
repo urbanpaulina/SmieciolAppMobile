@@ -74,7 +74,6 @@ public class MenuMainPage extends AppCompatActivity implements NavigationView.On
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
             MenuInflater inflater = getMenuInflater();
@@ -161,7 +160,7 @@ public class MenuMainPage extends AppCompatActivity implements NavigationView.On
                // getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new oKlubie_fragment()).commit();
                 break;
             case R.id.Add_Product:
-               // getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new aktu()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new AddProductAdmin()).commit();
                 break;
             case R.id.Ranking:
                 getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new StatsPage()).commit();
