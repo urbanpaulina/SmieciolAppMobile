@@ -2,14 +2,19 @@ package com.smieciolapp.ViewModel;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.media.ExifInterface;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -48,8 +53,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.mlkit.vision.barcode.Barcode;
+import com.google.mlkit.vision.barcode.BarcodeScanner;
+import com.google.mlkit.vision.barcode.BarcodeScanning;
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.text.Text;
+import com.google.mlkit.vision.text.TextRecognition;
+import com.google.mlkit.vision.text.TextRecognizer;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+import com.journeyapps.barcodescanner.CaptureActivity;
 import com.smieciolapp.R;
 import com.smieciolapp.data.model.Product;
+import com.smieciolapp.data.model.ScanBarcode;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -57,6 +73,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
@@ -66,6 +83,7 @@ public class ScanProductsPage extends Fragment {
 
     ImageView imageView;
     Button takePic;
+    Button scanProduct;
     TextView textFromPic;
     TextView sumOfPlasticWeight;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -74,6 +92,9 @@ public class ScanProductsPage extends Fragment {
     ListView prodList;
     ListView shoppingList;
     double sumOfWeight=0;
+    boolean scanReceipt=false;
+    boolean scanBarcode=false;
+    private String [] permissions = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.ACCESS_FINE_LOCATION", "android.permission.READ_PHONE_STATE", "android.permission.SYSTEM_ALERT_WINDOW","android.permission.CAMERA"};
 
     //baza
     DatabaseReference db = FirebaseDatabase.getInstance().getReference("Products");
@@ -96,6 +117,12 @@ public class ScanProductsPage extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_scan, container, false);
 
+
+        int requestCode = 200;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(permissions, requestCode);
+        }
+
         imageView = (ImageView) view.findViewById(R.id.pictureTaken);
         takePic = (Button) view.findViewById(R.id.takePhoto);
         textFromPic = (TextView) view.findViewById(R.id.recognizedText);
@@ -103,6 +130,7 @@ public class ScanProductsPage extends Fragment {
         prodList = (ListView) view.findViewById(R.id.prodList);
         shoppingList = (ListView) view.findViewById(R.id.shoppingList);
         sumOfPlasticWeight = (TextView) view.findViewById(R.id.sumOfPlasticWeight);
+        scanProduct = (Button) view.findViewById(R.id.scanProduct);
 
         //lista
         products = new ArrayList<Product>();
@@ -136,6 +164,15 @@ public class ScanProductsPage extends Fragment {
             }
         });
 
+
+        // skan kodu kreskowego
+        scanProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            scanBarcode=true;
+            scanBarcode();
+            }
+        });
 
         // search view
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -171,6 +208,7 @@ public class ScanProductsPage extends Fragment {
         takePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                scanReceipt=true;
                 dispatchTakePictureIntent();
             }
         });
@@ -291,48 +329,92 @@ public class ScanProductsPage extends Fragment {
 
         return bitmap;
     }
+    private void scanBarcode(){
+        IntentIntegrator integrator = new IntentIntegrator(getActivity());
+        integrator.setCaptureActivity(ScanBarcode.class);
+        integrator.setOrientationLocked(false);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
+        integrator.setPrompt("Skanuję produkt");
+        integrator.forSupportFragment(ScanProductsPage.this).initiateScan();
+    }
 
     //pobranie obrazu przez intent
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-                try{
-                    galleryAddPic();
+        System.out.println("ok");
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result!=null){
+            if(result.getContents() != null){
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage(result.getContents());
+                System.out.println(result.getContents());
+                textFromPic.setText(result.getContents());
+                builder.setTitle("Rezultat skanowania");
+                scanBarcode=false;
+                builder.setPositiveButton("Skanuj ponownie", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        scanBarcode();
+                    }
+                }).setNegativeButton("Koniec", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //finish();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+            else
+                Toast.makeText(getContext(), "Brak produktu", Toast.LENGTH_LONG).show();
+        } else
+            super.onActivityResult(requestCode, resultCode,data);
 
-                    Bitmap bitmap = setPic();
-                    Bitmap okBitmap = rotateImage(bitmap);
 
-                    imageView.setImageBitmap(okBitmap);
+
+
+        try{
+                    if(scanReceipt){
+                        galleryAddPic();
+
+                        Bitmap bitmap = setPic();
+                        Bitmap okBitmap = rotateImage(bitmap);
+
+                        imageView.setImageBitmap(okBitmap);
+
+                        TextRecognizer recognizer = TextRecognition.getClient();
+                        InputImage image = InputImage.fromBitmap(okBitmap,0);
+
+
+                        Task<Text> result1 =
+                                recognizer.process(image)
+                                        .addOnSuccessListener(new OnSuccessListener<Text>() {
+                                            @Override
+                                            public void onSuccess(Text visionText) {
+                                                textFromPic.setText(visionText.getText());
+                                                System.out.println(visionText.getText());
+                                                scanReceipt=false;
+                                            }
+                                        })
+                                        .addOnFailureListener(
+                                                new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        // Task failed with an exception
+                                                        // ...
+                                                    }
+                                                });
+
+                    }
+
+
                 } catch (Exception e){
                     // do nothing :)
                 }
 
-
-                    //FirebaseVisionImage firebaseVisionImage = FirebaseVisionImage.fromBitmap(bitmap);
-
-                    //final FirebaseVision firebaseVision = FirebaseVision.getInstance();
-
-                    //FirebaseVisionTextRecognizer firebaseVisionTextRecognizer = firebaseVision.getOnDeviceTextRecognizer();
-
-                    //Task<FirebaseVisionText> task = firebaseVisionTextRecognizer.processImage(firebaseVisionImage);
-
-                    //task.addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
-                        //@Override
-                        //public void onSuccess(FirebaseVisionText firebaseVisionText) {
-                         //   String text = firebaseVisionText.getText();
-                         //   textFromPic.setText(text);
-                          //  System.out.println(text);
-                        //}
-                   // });
-                   // task.addOnFailureListener(new OnFailureListener() {
-                    //    @Override
-                     //   public void onFailure(@NonNull Exception e) {
-                     //       Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG);
-                      //  }
-                    //});
-
-
     }
+
 
 
 }
