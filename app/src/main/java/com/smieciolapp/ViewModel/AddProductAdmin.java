@@ -1,8 +1,12 @@
 package com.smieciolapp.ViewModel;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -19,8 +23,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.smieciolapp.R;
 import com.smieciolapp.data.model.Product;
+import com.smieciolapp.data.model.ScanBarcode;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,12 +35,15 @@ import java.util.Map;
 import static android.content.ContentValues.TAG;
 
 
+// TO DO waga nie przyjmuje wartosci po przecinku
+
 public class AddProductAdmin extends Fragment  implements View.OnClickListener {
     EditText NameProduct, WeightProduct, Barcode, Category;
     Button addProduct;
     FirebaseAuth fAuth;
     FirebaseFirestore db;
     DatabaseReference Product_Ref;
+    Button scanProd;
     String productId;
 
     public AddProductAdmin() {
@@ -58,13 +68,27 @@ public class AddProductAdmin extends Fragment  implements View.OnClickListener {
         Category = view.findViewById(R.id.etCategory);
         addProduct = view.findViewById(R.id.addButton);
         addProduct.setOnClickListener(this);
+        scanProd = (Button) view.findViewById(R.id.scanProd);
 
         fAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
         Product_Ref = FirebaseDatabase.getInstance().getReference().child("Products");
 
+
+        // on click skanuj produkt
+        scanProd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ScanBarcode scanBarcode = new ScanBarcode();
+                scanBarcode.scanBarcode(getActivity(),AddProductAdmin.this);
+            }
+        });
+
+
         return view;
+
+
 
     }
 
@@ -95,6 +119,7 @@ public class AddProductAdmin extends Fragment  implements View.OnClickListener {
         return false;
     }
 
+
     public void addproduct() {
 
         String name = NameProduct.getText().toString();
@@ -123,6 +148,39 @@ public class AddProductAdmin extends Fragment  implements View.OnClickListener {
         @Override
         public void onClick (View v){
             addproduct();
-
         }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        System.out.println("ok");
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result!=null){
+            if(result.getContents() != null){
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage(result.getContents());
+                System.out.println(result.getContents());
+                Barcode.setText(result.getContents());
+                builder.setTitle("Rezultat skanowania");
+
+                builder.setPositiveButton("Skanuj ponownie", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ScanBarcode scanBarcode = new ScanBarcode();
+                        scanBarcode.scanBarcode(getActivity(),AddProductAdmin.this);
+                    }
+                }).setNegativeButton("Koniec", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //finish();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+            else
+                Toast.makeText(getContext(), "Brak produktu", Toast.LENGTH_LONG).show();
+        } else
+        super.onActivityResult(requestCode, resultCode, data);
     }
+}
+

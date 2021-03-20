@@ -53,9 +53,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.mlkit.vision.barcode.Barcode;
-import com.google.mlkit.vision.barcode.BarcodeScanner;
-import com.google.mlkit.vision.barcode.BarcodeScanning;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
@@ -167,7 +164,8 @@ public class ScanProductsPage extends Fragment {
             @Override
             public void onClick(View v) {
             scanBarcode=true;
-            scanBarcode();
+                ScanBarcode scanBarcode = new ScanBarcode();
+                scanBarcode.scanBarcode(getActivity(), ScanProductsPage.this);
             }
         });
 
@@ -326,14 +324,7 @@ public class ScanProductsPage extends Fragment {
 
         return bitmap;
     }
-    private void scanBarcode(){
-        IntentIntegrator integrator = new IntentIntegrator(getActivity());
-        integrator.setCaptureActivity(ScanBarcode.class);
-        integrator.setOrientationLocked(false);
-        integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
-        integrator.setPrompt("Skanuję produkt");
-        integrator.forSupportFragment(ScanProductsPage.this).initiateScan();
-    }
+
 
     //pobranie obrazu przez intent
     @Override
@@ -352,7 +343,8 @@ public class ScanProductsPage extends Fragment {
                 builder.setPositiveButton("Skanuj ponownie", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        scanBarcode();
+                        ScanBarcode scanBarcode = new ScanBarcode();
+                        scanBarcode.scanBarcode(getActivity(), ScanProductsPage.this);
                     }
                 }).setNegativeButton("Koniec", new DialogInterface.OnClickListener() {
                     @Override
