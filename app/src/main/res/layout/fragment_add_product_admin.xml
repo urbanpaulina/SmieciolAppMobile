@@ -9,164 +9,176 @@
     tools:context=".ViewModel.AddProductAdmin">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#D1F8D1">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/txt_Name"
-            android:layout_width="212dp"
-            android:layout_height="41dp"
-            android:layout_marginStart="70dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="179dp"
-            android:text="Nazwa"
-            android:textColor=" #000000"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.323"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-        <EditText
-            android:id="@+id/etName"
-            android:layout_width="279dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="70dp"
-            android:layout_marginEnd="112dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#D1F8D1">
 
-            android:inputType="text"
-            android:padding="10dp"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.323"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_Name" />
+                <TextView
+                    android:id="@+id/txt_Name"
+                    android:layout_width="212dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="70dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginEnd="179dp"
+                    android:text="Nazwa"
+                    android:textColor=" #000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.323"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txtWeight"
-            android:layout_width="212dp"
-            android:layout_height="41dp"
-            android:layout_marginStart="70dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="179dp"
-            android:text="Waga (kg)"
-            android:textColor=" #000000"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:inputType="numberDecimal|numberSigned"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.323"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etName" />
+                <EditText
+                    android:id="@+id/etName"
+                    android:layout_width="279dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="70dp"
+                    android:layout_marginEnd="112dp"
 
-        <EditText
-            android:id="@+id/etWeight"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="70dp"
-            android:layout_marginEnd="245dp"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.323"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_Name" />
 
-            android:inputType="number"
-            android:padding="10dp"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.305"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtWeight" />
+                <TextView
+                    android:id="@+id/txtWeight"
+                    android:layout_width="212dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="70dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="179dp"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:text="Waga (kg)"
+                    android:textColor=" #000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.323"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etName" />
 
-        <TextView
-            android:id="@+id/txtBarcode"
-            android:layout_width="212dp"
-            android:layout_height="41dp"
-            android:layout_marginStart="70dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="179dp"
-            android:text="Kod kreskowy"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.323"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etWeight" />
+                <EditText
+                    android:id="@+id/etWeight"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="70dp"
+                    android:layout_marginEnd="245dp"
 
-        <EditText
-            android:id="@+id/etBarcode"
-            android:layout_width="283dp"
-            android:layout_height="50dp"
+                    android:inputType="number"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.305"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtWeight" />
 
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="76dp"
-            android:editable="false"
-            android:inputType="number"
-            android:padding="10dp"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scanProd"
-            tools:text="Kod:" />
+                <TextView
+                    android:id="@+id/txtBarcode"
+                    android:layout_width="212dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="70dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="179dp"
+                    android:text="Kod kreskowy"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.323"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etWeight" />
 
-        <TextView
-            android:id="@+id/txtCategory"
-            android:layout_width="212dp"
-            android:layout_height="41dp"
-            android:layout_marginStart="70dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="179dp"
-            android:text="Kategoria"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.32"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etBarcode" />
+                <EditText
+                    android:id="@+id/etBarcode"
+                    android:layout_width="283dp"
+                    android:layout_height="50dp"
 
-        <EditText
-            android:id="@+id/etCategory"
-            android:layout_width="283dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="70dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="76dp"
+                    android:editable="false"
+                    android:inputType="number"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/scanProd"
+                    tools:text="Kod:" />
 
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="112dp"
-            android:inputType="text"
-            android:padding="10dp"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.37"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtCategory" />
+                <TextView
+                    android:id="@+id/txtCategory"
+                    android:layout_width="212dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="70dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="179dp"
+                    android:text="Kategoria"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.32"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etBarcode" />
 
-        <Button
-            android:id="@+id/addButton"
-            android:layout_width="127dp"
-            android:layout_height="52dp"
-            android:layout_marginStart="133dp"
-            android:layout_marginTop="164dp"
-            android:layout_marginEnd="151dp"
-            android:text="ADD"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
+                <EditText
+                    android:id="@+id/etCategory"
+                    android:layout_width="283dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="70dp"
 
-            android:textStyle="bold"
-            app:backgroundTint="#40CC52"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etBarcode" />
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="112dp"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.37"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtCategory" />
 
-        <Button
-            android:id="@+id/scanProd"
-            android:layout_width="193dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:text="Skanuj"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.238"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtBarcode" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <Button
+                    android:id="@+id/addButton"
+                    android:layout_width="127dp"
+                    android:layout_height="52dp"
+                    android:layout_marginStart="133dp"
+                    android:layout_marginTop="164dp"
+                    android:layout_marginEnd="151dp"
+                    android:text="ADD"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+
+                    android:textStyle="bold"
+                    app:backgroundTint="#40CC52"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etBarcode" />
+
+                <Button
+                    android:id="@+id/scanProd"
+                    android:layout_width="193dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Skanuj"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.238"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtBarcode" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

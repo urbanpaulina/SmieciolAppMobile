@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/MainPage"
+        android:fontFamily="sans-serif-black"
+        android:icon="@drawable/ic_home"
+        android:textColor="#F4F4F4"
+        android:title="Strona główna" />
+
+    <item
+        android:id="@+id/Scan_Recipt"
+        android:fontFamily="sans-serif-black"
+        android:icon="@drawable/ic_receipt"
+        android:textColor="#F4F4F4"
+        android:title="Skanuj paragon" />
+    <item
+        android:id="@+id/My_Shoppings"
+        android:fontFamily="sans-serif-black"
+        android:icon="@drawable/ic_grocery_store"
+        android:textColor="#F4F4F4"
+        android:title="Moje zakupy" />
+    <item
+        android:id="@+id/Add_Product"
+        android:fontFamily="sans-serif-black"
+        android:icon="@drawable/ic_grocery_store"
+        android:textColor="#FFFFFF"
+        android:title="Moje zakupy" />
+
+    <item
+        android:id="@+id/Ranking"
+        android:fontFamily="sans-serif-black"
+        android:icon="@drawable/ic_rankings"
+        android:textColor="#F4F4F4"
+        android:title="Ranking" />
+</menu>

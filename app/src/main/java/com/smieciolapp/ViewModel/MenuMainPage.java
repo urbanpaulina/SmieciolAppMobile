@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -24,12 +26,13 @@ import com.smieciolapp.autentication.FirebaseAuthClass;
 import com.smieciolapp.autentication.login.LoginActivity;
 import com.smieciolapp.data.model.User;
 
-public class MenuMainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MenuMainPage extends AppCompatActivity  {
 
     private DrawerLayout mlayout , m2layout;
     FirebaseAuthClass authClass = new FirebaseAuthClass();
 
     User user;
+    BottomNavigationView bottomNavView;
     TextView userName;
     private String email="";
     Intent intent;
@@ -37,6 +40,7 @@ public class MenuMainPage extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.menu_main_page);
 
 
         if(authClass.getCurrentUser()==null){
@@ -44,7 +48,7 @@ public class MenuMainPage extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
         }
 
-        setContentView(R.layout.menu_main_page);
+
         Toolbar toolbar=findViewById(R.id.toolbar);
         userName = findViewById(R.id.userName);
 
@@ -54,31 +58,24 @@ public class MenuMainPage extends AppCompatActivity implements NavigationView.On
         //intent z poprzedniego activity
         intent = getIntent();
         email = intent.getStringExtra("document");
-        //Toast.makeText(getApplicationContext(),"email:" + email,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"email:" + email,Toast.LENGTH_SHORT).show();
 
         //inicjalizacja usera
 
         user = getUserFromFirestore(email);
 
-        mlayout = (DrawerLayout) findViewById(R.id.left_menu);
-        NavigationView navigationView = findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        ActionBarDrawerToggle mtoggle=new ActionBarDrawerToggle(this,mlayout,toolbar,R.string.open,R.string.close);
-        mlayout.addDrawerListener(mtoggle);
-        mtoggle.syncState();
-        if (savedInstanceState == null) {
-           // getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,
-                   // new MainPage()).commit();
-            navigationView.setCheckedItem(R.id.MainPage);
-        }
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.top_menu,menu);
-            return super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.top_menu,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -147,44 +144,37 @@ public class MenuMainPage extends AppCompatActivity implements NavigationView.On
     }
 
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()){
-            case R.id.MainPage:
-               getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new MainPage()).commit();
-                break;
-            case R.id.Scan_Recipt:
-                getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new ScanProductsPage()).commit();
-                break;
-            case R.id.My_Shoppings:
-               // getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new oKlubie_fragment()).commit();
-                break;
-            case R.id.Add_Product:
-                getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new AddProductAdmin()).commit();
-                break;
-            case R.id.Ranking:
-                getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new StatsPage()).commit();
-                break;
-            case R.id.Add_Shoppings_Scan:
-                getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new AddShoppingScan()).commit();
-                break;
-        }
-        mlayout.closeDrawer(GravityCompat.START);
-        return true;
-    }
-    @Override
-    public void onBackPressed(){
-        if(mlayout.isDrawerOpen(GravityCompat.START)){
-            mlayout.closeDrawer(GravityCompat.START);
-        }else {
-            // wyczyść stos, wyjdź z appki
-            Intent a = new Intent(Intent.ACTION_MAIN);
-            a.addCategory(Intent.CATEGORY_HOME);
-            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(a);
-        }
-    }
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment selectedFragment = null;
+            switch (item.getItemId()){
+                case R.id.MainPage:
+                    selectedFragment = new MainPage();
+                    break;
+                case R.id.Scan_Recipt:
+                    selectedFragment = new ScanProductsPage();
+                    //getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new ScanProductsPage()).commit();
+                    break;
+                case R.id.My_Shoppings:
+                    selectedFragment = new AddProductAdmin();
+                    //selectedFragment = new ScanProductsPage();
 
+                    break;
+                case R.id.Add_Product:
+                    selectedFragment = new AddProductAdmin();
+                    //getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new AddProductAdmin()).commit();
+                    break;
+                case R.id.Ranking:
+                    selectedFragment = new StatsPage();
+                    //getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new StatsPage()).commit();
+                    break;
+            }
+            getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container, selectedFragment).commit();
+            return true;
+//
+        }
+    };
 
 }
 

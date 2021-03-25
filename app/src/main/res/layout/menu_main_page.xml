@@ -8,7 +8,8 @@
     android:id="@+id/left_menu">
 
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -24,26 +25,45 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:titleTextColor="#006402" />
 
+
         <FrameLayout
             android:id="@+id/Fragment_container"
+            android:layout_width="wrap_content"
+            android:layout_height="550dp"
+            android:layout_above="@+id/bottomNavigationView"
+            android:layout_below="@+id/toolbar"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#1359D3"
+            app:menu="@menu/bottom_navigation" />
 
-    </LinearLayout>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:animateLayoutChanges="false"
-        android:animationCache="false"
-        android:background="@color/green"
-        android:scrollbarSize="6dp"
-        app:headerLayout="@layout/header"
-        app:itemTextAppearance="@style/TextAppearance.AppCompat.Large"
-        app:itemTextColor="#1B1919"
-        app:menu="@menu/left_menu" />
+
+    </RelativeLayout>
+
+<!--    <com.google.android.material.navigation.NavigationView-->
+<!--        android:id="@+id/navigation_view"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="start"-->
+<!--        android:animateLayoutChanges="false"-->
+<!--        android:animationCache="false"-->
+<!--        android:background="@color/green"-->
+<!--        android:scrollbarSize="6dp"-->
+<!--        app:headerLayout="@layout/header"-->
+<!--        app:itemTextAppearance="@style/TextAppearance.AppCompat.Large"-->
+<!--        app:itemTextColor="#1B1919"-->
+<!--        app:menu="@menu/left_menu" />-->
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
