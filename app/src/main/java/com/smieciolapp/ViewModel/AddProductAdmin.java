@@ -94,28 +94,28 @@ public class AddProductAdmin extends Fragment  implements View.OnClickListener {
 
     private boolean hasValidationErrors(String name, String weight, String barcode) {
         if (name.isEmpty()) {
-            NameProduct.setError("Product name is required");
+            NameProduct.setError("Wpisz nazwę produktu");
             NameProduct.requestFocus();
             return true;
         }
         if (weight.isEmpty()) {
-            WeightProduct.setError("Weight is required");
+            WeightProduct.setError("Waga jest wymagana");
             WeightProduct.requestFocus();
             return true;
         }
         if (barcode.isEmpty()) {
-            Barcode.setError("Barcode is required");
+            Barcode.setError("Wymagany jest kod kreskowy");
             Barcode.requestFocus();
             return true;
         }
-        if (barcode.length() < 12) {
-            Barcode.setError("Barcode must have 12 numbers");
-            return true;
-        }
-        if (barcode.length() > 12) {
-            Barcode.setError("Barcode must have 12 numbers");
-            return true;
-        }
+        //if (barcode.length() < 12) {
+            //Barcode.setError("Barcode must have 12 numbers");
+            //return true;
+        //}
+        //if (barcode.length() > 12) {
+          //  Barcode.setError("Barcode must have 12 numbers");
+          //  return true;
+        //}
         return false;
     }
 

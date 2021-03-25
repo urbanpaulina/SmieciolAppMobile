@@ -23,6 +23,12 @@
         android:textColor="#2D2B2B"
         android:title="Moje zakupy" />
     <item
+        android:id="@+id/Add_Shoppings_Scan"
+        android:fontFamily="sans-serif-black"
+        android:icon="@drawable/home_icon"
+        android:textColor="#2D2B2B"
+        android:title="Dodaj zakupy" />
+    <item
         android:id="@+id/Add_Product"
         android:fontFamily="sans-serif-black"
         android:icon="@drawable/home_icon"

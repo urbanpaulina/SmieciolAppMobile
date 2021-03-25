@@ -54,7 +54,7 @@ public class MenuMainPage extends AppCompatActivity implements NavigationView.On
         //intent z poprzedniego activity
         intent = getIntent();
         email = intent.getStringExtra("document");
-        Toast.makeText(getApplicationContext(),"email:" + email,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(),"email:" + email,Toast.LENGTH_SHORT).show();
 
         //inicjalizacja usera
 
@@ -164,6 +164,9 @@ public class MenuMainPage extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.Ranking:
                 getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new StatsPage()).commit();
+                break;
+            case R.id.Add_Shoppings_Scan:
+                getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new AddShoppingScan()).commit();
                 break;
         }
         mlayout.closeDrawer(GravityCompat.START);
