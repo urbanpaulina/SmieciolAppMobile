@@ -101,7 +101,7 @@ public class AddShoppingScan extends Fragment {
         }
 
         //adapter
-        prodAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, products);
+        prodAdapter = new ArrayAdapter<>(Objects.requireNonNull(getContext()), android.R.layout.simple_list_item_1, products);
         shoppingAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, shoppingProducts);
         prodList.setAdapter(prodAdapter);
         shoppingList.setAdapter(shoppingAdapter);
@@ -137,13 +137,10 @@ public class AddShoppingScan extends Fragment {
         });
 
         //potwierdzenie zakupów
-        confirmShopping.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences settings = getActivity().getSharedPreferences("SHOPPING_LIST_SAVED", Context.MODE_PRIVATE);
-                settings.edit().clear().apply();
-                Toast.makeText(getContext(), "Usunieto liste " , Toast.LENGTH_LONG).show();
-            }
+        confirmShopping.setOnClickListener(v -> {
+            SharedPreferences settings = Objects.requireNonNull(getActivity()).getSharedPreferences("SHOPPING_LIST_SAVED", Context.MODE_PRIVATE);
+            settings.edit().clear().apply();
+            Toast.makeText(getContext(), "Usunieto liste " , Toast.LENGTH_LONG).show();
         });
 
 
@@ -151,12 +148,9 @@ public class AddShoppingScan extends Fragment {
         scanProduct.setOnClickListener(v -> scanBarcode.scanBarcode(getActivity(),AddShoppingScan.this));
 
 
-        searchView.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showRecommendedOptions(prodList);
-                setListViewHeightBasedOnChildren(prodList);
-            }
+        searchView.setOnSearchClickListener(v -> {
+            showRecommendedOptions(prodList);
+            setListViewHeightBasedOnChildren(prodList);
         });
 
         // search view
