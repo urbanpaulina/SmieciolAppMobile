@@ -7,6 +7,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +25,7 @@ import com.smieciolapp.ViewModel.WelcomePage;
 import com.smieciolapp.autentication.FirebaseAuthClass;
 import com.smieciolapp.ViewModel.MenuMainPage;
 import com.smieciolapp.R;
+import com.smieciolapp.data.model.RegisterValidation;
 
 import io.paperdb.Paper;
 
@@ -48,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-
+        final RegisterValidation registerValidation=new RegisterValidation();
 
         setContentView(R.layout.activity_login);
 
@@ -69,13 +73,29 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (TextUtils.isEmpty(emailEditText.getText().toString().trim())) {
+                    emailEditText.setError("Email is required");
+
+                }
+                if (TextUtils.isEmpty(passwordEditText.getText().toString().trim())) {
+                    passwordEditText.setError("Password is required");
+                    return;
+                }
+                if (passwordEditText.getText().toString().trim().length() < 6) {
+                    passwordEditText.setError("Password must be >=6");
+                    return;
+                }
+
+                loadingProgressBar.setVisibility(View.VISIBLE);
                 //pobranie uzytkownika wpisanego w formie i walidacja danych jesli ok to nowe activity
                 try{
                    auth.logIn(emailEditText.getText().toString().trim(),passwordEditText.getText().toString().trim()).addOnFailureListener(new OnFailureListener() {
                        @Override
                        public void onFailure(@NonNull Exception e) {
-                           Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
 
+                           Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                           loadingProgressBar.setVisibility(View.INVISIBLE);
                        }
                    }).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                        @Override
