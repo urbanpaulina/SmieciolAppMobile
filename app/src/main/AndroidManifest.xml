@@ -45,8 +45,7 @@
         </provider>
 
     <activity
-            android:name=".autentication.login.LoginActivity"
-            android:label="@string/title_activity_login" />
+            android:name=".autentication.login.LoginActivity" />
         <activity android:name=".ViewModel.WelcomePage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

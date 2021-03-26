@@ -1,6 +1,7 @@
 package com.smieciolapp.autentication.login;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,9 +28,11 @@ import io.paperdb.Paper;
 
 public class LoginActivity extends AppCompatActivity {
 
+    TextView smieciol_napis,Login,Haslo,przypomnienie,brak_konta,zarejestruj_sie;
     EditText emailEditText;
     EditText passwordEditText;
     Button loginButton ;
+    ImageView segregacja;
     ProgressBar loadingProgressBar ;
 
     FirebaseAuthClass auth = new FirebaseAuthClass();
@@ -47,8 +52,17 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
+        smieciol_napis=findViewById(R.id.smieciol_napis);
+        Login=findViewById(R.id.Login);
+        Haslo=findViewById(R.id.Haslo);
+        przypomnienie=findViewById(R.id.przypomnienie);
+        przypomnienie.setPaintFlags(przypomnienie.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+        brak_konta=findViewById(R.id.brak_konta);
+        zarejestruj_sie=findViewById(R.id.zarejestruj_sie);
+        zarejestruj_sie.setPaintFlags(zarejestruj_sie.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
+        segregacja=findViewById(R.id.segregacja);
         loginButton = findViewById(R.id.register);
         loadingProgressBar = findViewById(R.id.loading);
 
