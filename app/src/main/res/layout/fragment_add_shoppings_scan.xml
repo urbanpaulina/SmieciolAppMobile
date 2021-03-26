@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:fillViewport="true"
-    app:layoutDescription="@xml/fragment_add_shoppings_scan_scene">
+    android:fillViewport="true">
 
 <RelativeLayout
 
@@ -16,8 +15,8 @@
         android:id="@+id/lista_produ"
         android:layout_width="402.65dp"
         android:layout_height="34dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="3dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="3dp"
         android:background="@drawable/border_for_textview"
         android:gravity="center_horizontal|top"
         android:text="Zaskanuj produkt"
@@ -46,7 +45,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lista_produ"
-        app:srcCompat="@drawable/barcode" />
+        app:srcCompat="@drawable/barcode"
+        android:contentDescription="SCAN" />
 
 
     <SearchView
@@ -75,7 +75,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="37dp"
-        android:layout_marginEnd="37dp" />
+        android:layout_marginEnd="37dp"
+        tools:ignore="NestedScrolling" />
 
 
     <TextView
@@ -83,8 +84,8 @@
         android:layout_width="402.65dp"
         android:layout_height="34dp"
         android:layout_below="@+id/prodList"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/border_for_textview"
         android:gravity="center_horizontal|top"
@@ -106,7 +107,7 @@
 
         <TextView
             android:id="@+id/textView14"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
@@ -156,7 +157,8 @@
         android:fadeScrollbars="true"
         android:scrollbarAlwaysDrawHorizontalTrack="false"
         android:scrollbarAlwaysDrawVerticalTrack="false"
-        android:scrollbarSize="0dp" />
+        android:scrollbarSize="0dp"
+        tools:ignore="NestedScrolling" />
 
 
 </RelativeLayout>
