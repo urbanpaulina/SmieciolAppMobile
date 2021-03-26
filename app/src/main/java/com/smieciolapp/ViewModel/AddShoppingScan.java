@@ -17,7 +17,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -38,6 +41,7 @@ import com.smieciolapp.data.model.ScanBarcode;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -96,12 +100,15 @@ public class AddShoppingScan extends Fragment {
             sumOfWeight = 0.0;
         }
 
-
         //adapter
         prodAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, products);
         shoppingAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, shoppingProducts);
         prodList.setAdapter(prodAdapter);
         shoppingList.setAdapter(shoppingAdapter);
+
+
+        //opcjonalne poszerzenie layoutu
+        setListViewHeightBasedOnChildren(shoppingList);
 
 
         // odświeżanie dynamiczne
@@ -143,6 +150,15 @@ public class AddShoppingScan extends Fragment {
         // skan kodu kreskowego
         scanProduct.setOnClickListener(v -> scanBarcode.scanBarcode(getActivity(),AddShoppingScan.this));
 
+
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showRecommendedOptions(prodList);
+                setListViewHeightBasedOnChildren(prodList);
+            }
+        });
+
         // search view
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -152,19 +168,28 @@ public class AddShoppingScan extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                setListViewHeightBasedOnChildren(prodList);
                 prodAdapter.getFilter().filter(newText);
                 return false;
             }
+
         });
 
-        // dodawanie produktów
+        // dodawanie produktów do listy zakupów
         prodList.setOnItemClickListener((parent, view1, position, id) -> {
             System.out.println(prodAdapter.getItem(position));
-            Toast.makeText(getContext(), "Dodałeś: " + prodAdapter.getItem(position).getName(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Dodałeś: " + Objects.requireNonNull(prodAdapter.getItem(position)).getName(), Toast.LENGTH_LONG).show();
+            //dodanie produktu do listy zakupów
             shoppingProducts.add(prodAdapter.getItem(position));
 
+            //poszerzenie listView
+            setListViewHeightBasedOnChildren(shoppingList);
+
+            //ukrywanie rekomendacji
+            hideRecommendedOptions(prodList);
+
             //zmiana stanu obecnej wagi
-            sumOfWeight+=prodAdapter.getItem(position).getWeight();
+            sumOfWeight+= Objects.requireNonNull(prodAdapter.getItem(position)).getWeight();
             sumOfPlasticWeight.setText(String.valueOf(sumOfWeight));
 
             //zapisanie obecnego stanu produktów i wagi
@@ -179,8 +204,39 @@ public class AddShoppingScan extends Fragment {
     }
 
 
+    private static void showRecommendedOptions(ListView listView){
+        listView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+    }
+
+    private static void hideRecommendedOptions(ListView listView){
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height=1;
+        params.width=1;
+        listView.setLayoutParams(params);
+    }
+
+    private static void setListViewHeightBasedOnChildren(ListView listView) {
+
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+
+        int totalHeight = 0;
+        for (int i = 0, len = listAdapter.getCount(); i < len; i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight
+                + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+    }
+
     private void saveCurrentShoppingList(){
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("SHOPPING_LIST_SAVED", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences("SHOPPING_LIST_SAVED", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String jsonShoppingList = gson.toJson(shoppingProducts);
@@ -190,20 +246,24 @@ public class AddShoppingScan extends Fragment {
     }
 
     private ArrayList<Product> loadPreviousShoppingList(){
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("SHOPPING_LIST_SAVED", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences("SHOPPING_LIST_SAVED", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("SHOPPING_LIST", null);
         Type type = new TypeToken<ArrayList<Product>>(){}.getType();
         shoppingProducts = gson.fromJson(json,type);
 
+        // odświeżanie dynamiczne
+        shoppingList.invalidateViews();
+
         if(shoppingProducts == null) {
             shoppingProducts = new ArrayList<>();
+
         }
-        System.out.println("Moja poprzednia tablica" + shoppingProducts);
+
         return shoppingProducts;
     }
     private String loadPreviousPlasticValue(){
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("SHOPPING_LIST_SAVED", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences("SHOPPING_LIST_SAVED", MODE_PRIVATE);
         String plasticWeightJson;
         try{
             plasticWeightJson = sharedPreferences.getString("PLASTIC_WEIGHT",null);
@@ -233,6 +293,9 @@ public class AddShoppingScan extends Fragment {
                     scanBarcode.findBarcodeinDatabase(result.getContents(), product -> {
                         shoppingProducts.add(product);
 
+                        //poszerzenie listView
+                        setListViewHeightBasedOnChildren(shoppingList);
+
                         //zmiana stanu obecnej wagi
                         sumOfWeight+=product.getWeight();
                         sumOfPlasticWeight.setText(String.valueOf(sumOfWeight));
@@ -259,6 +322,7 @@ public class AddShoppingScan extends Fragment {
 
 
     }
+
 
 
 

@@ -157,9 +157,8 @@ public class MenuMainPage extends AppCompatActivity  {
                     //getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new ScanProductsPage()).commit();
                     break;
                 case R.id.My_Shoppings:
-                    selectedFragment = new AddProductAdmin();
+                    selectedFragment = new AddShoppingScan();
                     //selectedFragment = new ScanProductsPage();
-
                     break;
                 case R.id.Add_Product:
                     selectedFragment = new AddProductAdmin();
