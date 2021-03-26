@@ -22,7 +22,7 @@
     <item
         android:id="@+id/Add_Product"
         android:fontFamily="sans-serif-black"
-        android:icon="@drawable/ic_grocery_store"
+        android:icon="@drawable/ic_add"
         android:textColor="#FFFFFF"
         android:title="Moje zakupy" />
 

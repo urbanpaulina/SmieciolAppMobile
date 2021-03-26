@@ -171,7 +171,6 @@ public class MenuMainPage extends AppCompatActivity  {
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container, selectedFragment).commit();
             return true;
-//
         }
     };
 
