@@ -1,6 +1,7 @@
 package com.smieciolapp.autentication.registration;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,7 +12,9 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +23,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.smieciolapp.autentication.FirebaseAuthClass;
+import com.smieciolapp.autentication.login.LoginActivity;
 import com.smieciolapp.data.model.RegisterValidation;
 import com.smieciolapp.ViewModel.MenuMainPage;
 import com.smieciolapp.R;
@@ -44,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
         final RegisterValidation registerValidation=new RegisterValidation();
 
         //pola layoutu
+        final ScrollView scroll_view =findViewById(R.id.scroll_view);
         final EditText emailEditText = findViewById(R.id.email);
         final EditText passwordEditText = findViewById(R.id.password);
         final EditText confrimPassword = findViewById(R.id.confirm_password);
@@ -52,6 +57,18 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText username = findViewById(R.id.username);
         final TextView error = findViewById(R.id.error);
         final TextView errorUsername = findViewById(R.id.errorUsername);
+        final TextView zaloz_konto = findViewById(R.id.zaloz_konto);
+        final TextView Imie = findViewById(R.id.Imie);
+        final TextView Nazwisko = findViewById(R.id.Nazwisko);
+        final TextView Nazwa_uzytk = findViewById(R.id.Nazwa_uzytk);
+        final TextView Email = findViewById(R.id.Email);
+        final TextView Password = findViewById(R.id.Password);
+        final TextView Potwierdz = findViewById(R.id.Potwierdz);
+        final TextView Konto_istnieje = findViewById(R.id.Konto_istnieje);
+        final TextView zaloguj_sie = findViewById(R.id.zaloguj_sie);
+        zaloguj_sie.setPaintFlags(zaloguj_sie.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+        final ImageView segregacja2 = findViewById(R.id.segregacja2);
+
 
         //pola akcji
         final Button registerButton = findViewById(R.id.register);
@@ -132,6 +149,13 @@ public class RegisterActivity extends AppCompatActivity {
 
 
             } // onClick
+        });
+
+        zaloguj_sie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            }
         });
 
 

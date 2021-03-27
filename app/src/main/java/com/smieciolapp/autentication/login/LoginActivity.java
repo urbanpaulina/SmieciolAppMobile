@@ -25,6 +25,7 @@ import com.smieciolapp.ViewModel.WelcomePage;
 import com.smieciolapp.autentication.FirebaseAuthClass;
 import com.smieciolapp.ViewModel.MenuMainPage;
 import com.smieciolapp.R;
+import com.smieciolapp.autentication.registration.RegisterActivity;
 import com.smieciolapp.data.model.RegisterValidation;
 
 import io.paperdb.Paper;
@@ -113,7 +114,15 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        zarejestruj_sie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+            }
+        });
     }
+
 
 
 

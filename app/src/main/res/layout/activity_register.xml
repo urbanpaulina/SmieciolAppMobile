@@ -287,7 +287,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/register" />
 
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/zaloguj_sie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
@@ -316,7 +316,7 @@
                 app:layout_constraintVertical_bias="0.3" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/segregacja2"
                 android:layout_width="468dp"
                 android:layout_height="277dp"
                 android:layout_marginTop="22dp"
