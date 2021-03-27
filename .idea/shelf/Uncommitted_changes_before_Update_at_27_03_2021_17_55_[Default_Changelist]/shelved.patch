@@ -1,0 +1,190 @@
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_20_03_2021_12_05_[Default_Changelist]/shelved.patch
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Update_at_20_03_2021_12_05_[Default_Changelist]/shelved.patch	(revision 1c08b43c8cd519575d7427b56a26e12ee8e9a044)
++++ .idea/shelf/Uncommitted_changes_before_Update_at_20_03_2021_12_05_[Default_Changelist]/shelved.patch	(revision 1c08b43c8cd519575d7427b56a26e12ee8e9a044)
+@@ -1,175 +0,0 @@
+-Index: app/src/main/AndroidManifest.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    package=\"com.smieciolapp\">\r\n\r\n    <uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />\r\n    <uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"\r\n        android:maxSdkVersion=\"18\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/AppTheme\">\r\n        <activity android:name=\".ViewModel.ProfilePage\">\r\n        </activity>\r\n\r\n        <meta-data\r\n            android:name=\"com.google.firebase.ml.vision.DEPENDENCIES\"\r\n            android:value=\"ocr\" />\r\n\r\n        <activity\r\n            android:name=\".ViewModel.MenuMainPage\"\r\n            android:theme=\"@style/AppTheme.NoActionBar\">\r\n        </activity>\r\n\r\n        <provider\r\n            android:name=\"androidx.core.content.FileProvider\"\r\n            android:authorities=\"com.example.android.fileprovider\"\r\n            android:exported=\"false\"\r\n            android:grantUriPermissions=\"true\">\r\n            <meta-data\r\n                android:name=\"android.support.FILE_PROVIDER_PATHS\"\r\n                android:resource=\"@xml/file_paths\">\r\n            </meta-data>\r\n        </provider>\r\n\r\n    <activity\r\n            android:name=\".autentication.login.LoginActivity\"\r\n            android:label=\"@string/title_activity_login\" />\r\n        <activity android:name=\".ViewModel.WelcomePage\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity android:name=\".autentication.registration.RegisterActivity\" />\r\n    </application>\r\n\r\n</manifest>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/AndroidManifest.xml	(revision cf8b7f5f2644dae09f370cfc3df8e01b618fdf5a)
+-+++ app/src/main/AndroidManifest.xml	(date 1615467607111)
+-@@ -2,9 +2,16 @@
+- <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+-     package="com.smieciolapp">
+- 
+-+
+-     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+-     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+-         android:maxSdkVersion="18" />
+-+    <uses-permission android:name="android.permission.CAMERA" android:required="false" />
+-+    <uses-feature android:name="android.hardware.camera"/>
+-+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+-+    <uses-feature
+-+        android:name="android.hardware.camera.any"
+-+        android:required="true" />
+- 
+-     <application
+-         android:allowBackup="true"
+-@@ -12,6 +19,7 @@
+-         android:label="@string/app_name"
+-         android:roundIcon="@mipmap/ic_launcher_round"
+-         android:supportsRtl="true"
+-+        android:hardwareAccelerated="true"
+-         android:theme="@style/AppTheme">
+-         <activity android:name=".ViewModel.ProfilePage">
+-         </activity>
+-@@ -47,6 +55,12 @@
+-             </intent-filter>
+-         </activity>
+-         <activity android:name=".autentication.registration.RegisterActivity" />
+-+        <activity android:name=".data.model.ScanBarcode"
+-+            android:screenOrientation="fullSensor"
+-+            android:stateNotNeeded="true"
+-+            android:windowSoftInputMode="stateAlwaysHidden">
+-+
+-+        </activity>
+-     </application>
+- 
+- </manifest>
+-\ No newline at end of file
+-Index: app/src/main/res/layout/fragment_scan.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"fill_parent\"\r\n    tools:context=\".ViewModel.ScanProductsPage\">\r\n\r\n    <ImageView\r\n        android:id=\"@+id/pictureTaken\"\r\n        android:layout_width=\"262dp\"\r\n        android:layout_height=\"253dp\"\r\n        android:layout_marginStart=\"76dp\"\r\n        android:layout_marginBottom=\"40dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/takePhoto\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"20dp\"\r\n        android:text=\"Zweryfikuj zakupy\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.967\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/sumOfPlasticWeight\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/recognizedText\"\r\n        android:layout_width=\"290dp\"\r\n        android:layout_height=\"68dp\"\r\n        android:text=\"rozpoznany text\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/takePhoto\"\r\n        app:layout_constraintVertical_bias=\"0.287\" />\r\n\r\n    <SearchView\r\n        android:id=\"@+id/searchView\"\r\n        android:layout_width=\"294dp\"\r\n        android:layout_height=\"45dp\"\r\n        android:layout_marginTop=\"28dp\"\r\n        android:iconifiedByDefault=\"false\"\r\n        android:queryHint=\"Szukaj produktu\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.495\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <ScrollView\r\n        android:id=\"@+id/scrollView2\"\r\n        android:layout_width=\"298dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"12dp\"\r\n        android:fillViewport=\"true\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.495\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/searchView\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <ListView\r\n                android:id=\"@+id/prodList\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\" />\r\n        </LinearLayout>\r\n    </ScrollView>\r\n\r\n    <ScrollView\r\n        android:id=\"@+id/scrollView3\"\r\n        android:layout_width=\"212dp\"\r\n        android:layout_height=\"275dp\"\r\n        android:layout_marginStart=\"2dp\"\r\n        android:layout_marginTop=\"24dp\"\r\n        android:fillViewport=\"true\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/scrollView2\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <ListView\r\n                android:id=\"@+id/shoppingList\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\" />\r\n        </LinearLayout>\r\n    </ScrollView>\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView13\"\r\n        android:layout_width=\"180dp\"\r\n        android:layout_height=\"50dp\"\r\n        android:layout_marginTop=\"24dp\"\r\n        android:layout_marginEnd=\"8dp\"\r\n        android:text=\"Suma zakupionego plastiku:\"\r\n        android:textSize=\"18sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"1.0\"\r\n        app:layout_constraintStart_toEndOf=\"@+id/scrollView3\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/scrollView2\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/sumOfPlasticWeight\"\r\n        android:layout_width=\"175dp\"\r\n        android:layout_height=\"43dp\"\r\n        android:layout_marginTop=\"12dp\"\r\n        android:layout_marginEnd=\"8dp\"\r\n        android:textSize=\"18sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/textView13\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/res/layout/fragment_scan.xml	(revision cf8b7f5f2644dae09f370cfc3df8e01b618fdf5a)
+-+++ app/src/main/res/layout/fragment_scan.xml	(date 1615469900175)
+-@@ -8,34 +8,33 @@
+- 
+-     <ImageView
+-         android:id="@+id/pictureTaken"
+--        android:layout_width="262dp"
+--        android:layout_height="253dp"
+--        android:layout_marginStart="76dp"
+--        android:layout_marginBottom="40dp"
+--        app:layout_constraintBottom_toBottomOf="parent"
+--        app:layout_constraintStart_toStartOf="parent" />
+-+        android:layout_width="312dp"
+-+        android:layout_height="328dp"
+-+        android:layout_marginStart="64dp"
+-+        android:visibility="invisible"
+-+        app:layout_constraintStart_toStartOf="parent"
+-+        app:layout_constraintTop_toTopOf="@+id/recognizedText" />
+- 
+-     <Button
+-         android:id="@+id/takePhoto"
+--        android:layout_width="wrap_content"
+--        android:layout_height="wrap_content"
+-+        android:layout_width="177dp"
+-+        android:layout_height="61dp"
+-         android:layout_marginTop="20dp"
+-         android:text="Zweryfikuj zakupy"
+-         app:layout_constraintEnd_toEndOf="parent"
+--        app:layout_constraintHorizontal_bias="0.967"
+-+        app:layout_constraintHorizontal_bias="0.963"
+-         app:layout_constraintStart_toStartOf="parent"
+-         app:layout_constraintTop_toBottomOf="@+id/sumOfPlasticWeight" />
+- 
+-     <TextView
+-         android:id="@+id/recognizedText"
+--        android:layout_width="290dp"
+--        android:layout_height="68dp"
+--        android:text="rozpoznany text"
+--        app:layout_constraintBottom_toBottomOf="parent"
+-+        android:layout_width="371dp"
+-+        android:layout_height="306dp"
+-+        android:layout_marginTop="152dp"
+-         app:layout_constraintEnd_toEndOf="parent"
+-+        app:layout_constraintHorizontal_bias="0.6"
+-         app:layout_constraintStart_toStartOf="parent"
+--        app:layout_constraintTop_toBottomOf="@+id/takePhoto"
+--        app:layout_constraintVertical_bias="0.287" />
+-+        app:layout_constraintTop_toBottomOf="@+id/takePhoto" />
+- 
+-     <SearchView
+-         android:id="@+id/searchView"
+-@@ -117,4 +116,15 @@
+-         app:layout_constraintEnd_toEndOf="parent"
+-         app:layout_constraintTop_toBottomOf="@+id/textView13" />
+- 
+-+    <Button
+-+        android:id="@+id/scanProduct"
+-+        android:layout_width="175dp"
+-+        android:layout_height="66dp"
+-+        android:layout_marginTop="12dp"
+-+        android:text="Skanuj produkt"
+-+        app:layout_constraintEnd_toEndOf="parent"
+-+        app:layout_constraintHorizontal_bias="0.636"
+-+        app:layout_constraintStart_toEndOf="@+id/scrollView3"
+-+        app:layout_constraintTop_toBottomOf="@+id/takePhoto" />
+-+
+- </androidx.constraintlayout.widget.ConstraintLayout>
+-\ No newline at end of file
+-Index: app/src/main/java/com/smieciolapp/data/model/ScanBarcode.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/java/com/smieciolapp/data/model/ScanBarcode.java	(date 1615466151617)
+-+++ app/src/main/java/com/smieciolapp/data/model/ScanBarcode.java	(date 1615466151617)
+-@@ -0,0 +1,6 @@
+-+package com.smieciolapp.data.model;
+-+
+-+import com.journeyapps.barcodescanner.CaptureActivity;
+-+
+-+public class ScanBarcode extends CaptureActivity {
+-+}
+-Index: app/build.gradle
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>apply plugin: 'com.android.application'\r\napply plugin: 'com.google.gms.google-services'\r\n\r\nandroid {\r\n    compileSdkVersion 29\r\n    buildToolsVersion \"30.0.2\"\r\n\r\n    defaultConfig {\r\n        applicationId \"com.smieciolapp\"\r\n        minSdkVersion 23\r\n        targetSdkVersion 29\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n\r\n}\r\n\r\ndependencies {\r\n    implementation fileTree(dir: 'libs', include: ['*.jar'])\r\n\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n    implementation 'androidx.annotation:annotation:1.1.0'\r\n    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'\r\n    implementation \"androidx.camera:camera-extensions:1.0.0-alpha01\"\r\n    implementation 'io.paperdb:paperdb:2.7.1'\r\n    implementation 'com.google.firebase:firebase-auth:17.0.0'\r\n    implementation 'com.firebaseui:firebase-ui-firestore:7.1.1'\r\n    implementation 'com.google.firebase:firebase-database:19.3.0'\r\n    implementation 'com.google.android.gms:play-services-mlkit-text-recognition:16.1.3'\r\n    implementation 'com.google.firebase:firebase-functions:19.2.0'\r\n    implementation 'com.google.code.gson:gson:2.8.6'\r\n    testImplementation 'junit:junit:4.12'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n    implementation 'com.google.android.material:material:1.1.0'\r\n    implementation 'com.google.firebase:firebase-firestore:22.0.0'\r\n}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/build.gradle	(revision cf8b7f5f2644dae09f370cfc3df8e01b618fdf5a)
+-+++ app/build.gradle	(date 1615467938427)
+-@@ -2,12 +2,17 @@
+- apply plugin: 'com.google.gms.google-services'
+- 
+- android {
+-+
+-+    compileOptions {
+-+        sourceCompatibility JavaVersion.VERSION_1_8
+-+        targetCompatibility JavaVersion.VERSION_1_8
+-+    }
+-     compileSdkVersion 29
+-     buildToolsVersion "30.0.2"
+- 
+-     defaultConfig {
+-         applicationId "com.smieciolapp"
+--        minSdkVersion 23
+-+        minSdkVersion 24
+-         targetSdkVersion 29
+-         versionCode 1
+-         versionName "1.0"
+-@@ -38,6 +43,9 @@
+-     implementation 'com.firebaseui:firebase-ui-firestore:7.1.1'
+-     implementation 'com.google.firebase:firebase-database:19.3.0'
+-     implementation 'com.google.android.gms:play-services-mlkit-text-recognition:16.1.3'
+-+    implementation 'com.google.mlkit:barcode-scanning:16.1.1'
+-+    implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
+-+    implementation 'androidx.appcompat:appcompat:1.0.2'
+-     implementation 'com.google.firebase:firebase-functions:19.2.0'
+-     implementation 'com.google.code.gson:gson:2.8.6'
+-     testImplementation 'junit:junit:4.12'
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_20_03_2021_12_05__Default_Changelist_.xml
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Update_at_20_03_2021_12_05__Default_Changelist_.xml	(revision 1c08b43c8cd519575d7427b56a26e12ee8e9a044)
++++ .idea/shelf/Uncommitted_changes_before_Update_at_20_03_2021_12_05__Default_Changelist_.xml	(revision 1c08b43c8cd519575d7427b56a26e12ee8e9a044)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_20_03_2021_12_05_[Default_Changelist]" date="1616238360816" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_03_2021_12_05_[Default_Changelist]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 20.03.2021 12:05 [Default Changelist]" />
+-</changelist>
+\ No newline at end of file

@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        final RegisterValidation registerValidation=new RegisterValidation();
 
         setContentView(R.layout.activity_login);
 
@@ -77,15 +76,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (TextUtils.isEmpty(emailEditText.getText().toString().trim())) {
-                    emailEditText.setError("Email is required");
+                    emailEditText.setError("Email jest wymagany");
 
                 }
                 if (TextUtils.isEmpty(passwordEditText.getText().toString().trim())) {
-                    passwordEditText.setError("Password is required");
+                    passwordEditText.setError("Hasło jest wymagane");
                     return;
                 }
                 if (passwordEditText.getText().toString().trim().length() < 6) {
-                    passwordEditText.setError("Password must be >=6");
+                    passwordEditText.setError("Hasło musi mieć więcej niż 6 znaków");
                     return;
                 }
 
