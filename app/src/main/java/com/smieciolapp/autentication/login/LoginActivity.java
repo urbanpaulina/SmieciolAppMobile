@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
+import com.smieciolapp.ViewModel.Password_reminder;
 import com.smieciolapp.ViewModel.WelcomePage;
 import com.smieciolapp.autentication.FirebaseAuthClass;
 import com.smieciolapp.ViewModel.MenuMainPage;
@@ -119,6 +120,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+            }
+        });
+
+        przypomnienie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Password_reminder.class));
             }
         });
     }
