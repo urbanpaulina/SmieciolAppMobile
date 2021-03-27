@@ -91,7 +91,7 @@ public class MenuMainPage extends AppCompatActivity  {
                     return true;
                 case R.id.wyloguj:
                     authClass.logOut();
-                    Intent intent1 = new Intent(MenuMainPage.this, WelcomePage.class);
+                    Intent intent1 = new Intent(MenuMainPage.this, LoginActivity.class);
                     intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent1);
