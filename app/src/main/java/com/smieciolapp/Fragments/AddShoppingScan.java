@@ -1,8 +1,7 @@
-package com.smieciolapp.ViewModel;
+package com.smieciolapp.Fragments;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,12 +13,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -283,6 +279,7 @@ public class AddShoppingScan extends Fragment {
             if(result.getContents() != null){
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setMessage(result.getContents());
+
                     //dodanie zeskanowanego produktu do listy produktów
                     scanBarcode.findBarcodeinDatabase(result.getContents(), product -> {
                         shoppingProducts.add(product);
@@ -301,13 +298,14 @@ public class AddShoppingScan extends Fragment {
                         shoppingAdapter.notifyDataSetChanged();
                         shoppingList.invalidateViews();
                     });
-                builder.setTitle("Rezultat skanowania");
-                builder.setPositiveButton("To nie to, skanuj ponownie", (dialog, which) ->
+
+                        builder.setTitle("Rezultat skanowania");
+                        builder.setPositiveButton("To nie to, skanuj ponownie", (dialog, which) ->
                         scanBarcode.scanBarcode(getActivity(),AddShoppingScan.this)).
                         setNegativeButton("Ok", (dialog, which) ->
                                 Toast.makeText(getContext(), "Dodałeś produkt", Toast.LENGTH_LONG).show());
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
             }
             else
                 Toast.makeText(getContext(), "Brak produktu", Toast.LENGTH_LONG).show();

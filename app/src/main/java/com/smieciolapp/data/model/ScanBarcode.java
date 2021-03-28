@@ -57,5 +57,29 @@ public class ScanBarcode extends CaptureActivity {
 
     }
 
+    public void checkIfProductExists(String barcode, CheckIfBarcodeExistsCallback checkCallback){
+        //pobranie produktow
+        db.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    System.out.println(snapshot.getValue());
+                    try{
+                        Product prod = (Product)snapshot.getValue(Product.class);
+                        checkCallback.onCallback(prod.getBarcode().equals(barcode));
+                    } catch (Exception e) {
+                        System.out.println("Nie dodano " + snapshot.getValue(Product.class));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
 }
 

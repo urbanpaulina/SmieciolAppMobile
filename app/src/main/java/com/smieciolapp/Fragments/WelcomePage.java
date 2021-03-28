@@ -1,4 +1,4 @@
-package com.smieciolapp.ViewModel;
+package com.smieciolapp.Fragments;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -24,15 +24,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewModel.Password_reminder"></activity>
-        <activity android:name=".ViewModel.ProfilePage" />
+        <activity android:name=".Fragments.Password_reminder"></activity>
+        <activity android:name=".Fragments.ProfilePage" />
 
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="ocr" />
 
         <activity
-            android:name=".ViewModel.MenuMainPage"
+            android:name=".Fragments.MenuMainPage"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <provider
@@ -46,7 +46,7 @@
         </provider>
 
         <activity android:name=".autentication.login.LoginActivity" />
-        <activity android:name=".ViewModel.Start_screen">
+        <activity android:name=".Fragments.Start_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package com.smieciolapp.ViewModel;
+package com.smieciolapp.Fragments;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.smieciolapp.R;
 import com.smieciolapp.autentication.FirebaseAuthClass;

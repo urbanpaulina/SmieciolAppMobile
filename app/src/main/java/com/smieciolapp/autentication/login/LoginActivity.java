@@ -7,9 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,15 +19,11 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
-import com.smieciolapp.ViewModel.Password_reminder;
-import com.smieciolapp.ViewModel.WelcomePage;
+import com.smieciolapp.Fragments.Password_reminder;
 import com.smieciolapp.autentication.FirebaseAuthClass;
-import com.smieciolapp.ViewModel.MenuMainPage;
+import com.smieciolapp.Fragments.MenuMainPage;
 import com.smieciolapp.R;
 import com.smieciolapp.autentication.registration.RegisterActivity;
-import com.smieciolapp.data.model.RegisterValidation;
-
-import io.paperdb.Paper;
 
 
 public class LoginActivity extends AppCompatActivity {

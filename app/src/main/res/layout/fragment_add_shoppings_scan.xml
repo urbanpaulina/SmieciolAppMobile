@@ -11,43 +11,47 @@
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+
     <TextView
-        android:id="@+id/lista_produ"
-        android:layout_width="402.65dp"
-        android:layout_height="34dp"
+        android:id="@+id/textView16"
+        android:layout_width="266dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="3dp"
-        android:background="@drawable/border_for_textview"
-        android:gravity="center_horizontal|top"
-        android:text="Zaskanuj produkt"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="57dp"
+        android:text="Dodaj zakupy"
+        android:textColor="@color/darkGray"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txt_Name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.625"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <ImageView
         android:id="@+id/imageScan"
         android:layout_width="175dp"
         android:layout_height="129dp"
-        android:layout_below="@+id/lista_produ"
-        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView16"
 
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="111dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="125dp"
+        android:layout_marginStart="117dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="118dp"
         android:clickable="true"
+        android:contentDescription="SCAN"
         android:contextClickable="true"
         android:focusable="true"
         android:focusableInTouchMode="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lista_produ"
-        app:srcCompat="@drawable/barcode"
-        android:contentDescription="SCAN" />
-
+        app:layout_constraintTop_toBottomOf="@+id/lista_produ2"
+        app:srcCompat="@drawable/barcode" />
 
     <SearchView
         android:id="@+id/searchView"
@@ -98,7 +102,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:layout_below="@+id/lista_produ2"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"

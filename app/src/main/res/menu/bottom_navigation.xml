@@ -12,13 +12,13 @@
         android:fontFamily="sans-serif-black"
         android:icon="@drawable/ic_receipt"
         android:textColor="#F4F4F4"
-        android:title="Skanuj paragon" />
+        android:title="Moje paragony" />
     <item
         android:id="@+id/My_Shoppings"
         android:fontFamily="sans-serif-black"
         android:icon="@drawable/ic_grocery_store"
         android:textColor="#F4F4F4"
-        android:title="Moje zakupy" />
+        android:title="Dodaj zakupy" />
     <item
         android:id="@+id/Add_Product"
         android:fontFamily="sans-serif-black"

@@ -25,7 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.smieciolapp.autentication.FirebaseAuthClass;
 import com.smieciolapp.autentication.login.LoginActivity;
 import com.smieciolapp.data.model.RegisterValidation;
-import com.smieciolapp.ViewModel.MenuMainPage;
+import com.smieciolapp.Fragments.MenuMainPage;
 import com.smieciolapp.R;
 
 

@@ -1,10 +1,8 @@
-package com.smieciolapp.ViewModel;
+package com.smieciolapp.Fragments;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
@@ -18,7 +16,6 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.smieciolapp.R;
@@ -28,14 +25,11 @@ import com.smieciolapp.data.model.User;
 
 public class MenuMainPage extends AppCompatActivity  {
 
-    private DrawerLayout mlayout , m2layout;
-    FirebaseAuthClass authClass = new FirebaseAuthClass();
 
+    FirebaseAuthClass authClass = new FirebaseAuthClass();
     User user;
-    BottomNavigationView bottomNavView;
-    TextView userName;
-    private String email="";
     Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -50,15 +44,13 @@ public class MenuMainPage extends AppCompatActivity  {
 
 
         Toolbar toolbar=findViewById(R.id.toolbar);
-        userName = findViewById(R.id.userName);
 
         //toolbar
         setSupportActionBar(toolbar);
 
         //intent z poprzedniego activity
         intent = getIntent();
-        email = intent.getStringExtra("document");
-        Toast.makeText(getApplicationContext(),"email:" + email,Toast.LENGTH_SHORT).show();
+        String email = intent.getStringExtra("document");
 
         //inicjalizacja usera
 
@@ -80,8 +72,7 @@ public class MenuMainPage extends AppCompatActivity  {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(!user.getUserName().equals("admin"))
-        {
+
             switch(item.getItemId()){
                 case R.id.Profil:
                     //pobranie danych uzytkownika z firestora
@@ -97,23 +88,6 @@ public class MenuMainPage extends AppCompatActivity  {
                     startActivity(intent1);
                     return true;
             }
-        } else {
-            switch(item.getItemId()){
-                case R.id.Profil:
-                    //pobranie danych uzytkownika z firestora
-                    Intent intent = new Intent(MenuMainPage.this, ProfilePage.class);
-                    intent.putExtra("user",user);
-                    startActivity(intent);
-                    return true;
-                case R.id.wyloguj:
-                    authClass.logOut();
-                    Intent intent1 = new Intent(MenuMainPage.this, LoginActivity.class);
-                    intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent1);
-                    return true;
-            }
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -144,7 +118,7 @@ public class MenuMainPage extends AppCompatActivity  {
     }
 
 
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+    private final BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment selectedFragment = null;
@@ -161,7 +135,7 @@ public class MenuMainPage extends AppCompatActivity  {
                     //selectedFragment = new ScanProductsPage();
                     break;
                 case R.id.Add_Product:
-                    selectedFragment = new AddProductAdmin();
+                    selectedFragment = new AddProduct();
                     //getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new AddProductAdmin()).commit();
                     break;
                 case R.id.Ranking:
