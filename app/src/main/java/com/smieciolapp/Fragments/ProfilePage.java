@@ -55,15 +55,14 @@ public class ProfilePage extends AppCompatActivity {
            else
                setContentView(R.layout.activity_profile_user_admin);
 
-           fName = findViewById(R.id.firstname);
-           sName = findViewById(R.id.lastname);
-           uName = findViewById(R.id.email);
-           Email = findViewById(R.id.login);
+           uName = findViewById(R.id.userName);
+           fName = findViewById(R.id.firstName);
+           sName = findViewById(R.id.lastName);
 
-           fName.setText(user.getFirstName());
-           sName.setText(user.getLastName());
-           uName.setText(user.getUserName());
-           Email.setText(user.getEmail());
+
+           uName.setText("Nazwa użytkownika:" + user.getUserName());
+           fName.setText("Imię: "+ user.getFirstName());
+           sName.setText("Nazwisko: "+user.getLastName());
 
 
        }
