@@ -25,10 +25,10 @@ public class ScanBarcode extends CaptureActivity {
     public void scanBarcode(Activity activity, Fragment fragment) {
         IntentIntegrator integrator = new IntentIntegrator(activity);
         integrator.setCaptureActivity(ScanBarcode.class);
-        integrator.setOrientationLocked(false);
+        integrator.setOrientationLocked(true);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
         integrator.setPrompt("Skanuję produkt");
-        integrator.forSupportFragment(fragment).initiateScan();
+        IntentIntegrator.forSupportFragment(fragment).initiateScan();
     }
 
     public void findBarcodeinDatabase(String requestedBarcode, MyCallback myCallback) {
@@ -66,7 +66,11 @@ public class ScanBarcode extends CaptureActivity {
                     System.out.println(snapshot.getValue());
                     try{
                         Product prod = (Product)snapshot.getValue(Product.class);
-                        checkCallback.onCallback(prod.getBarcode().equals(barcode));
+                        if(prod.getBarcode().equals(barcode)) {
+                            checkCallback.onCallback(prod.getBarcode().equals(barcode));
+                        }
+
+
                     } catch (Exception e) {
                         System.out.println("Nie dodano " + snapshot.getValue(Product.class));
                     }

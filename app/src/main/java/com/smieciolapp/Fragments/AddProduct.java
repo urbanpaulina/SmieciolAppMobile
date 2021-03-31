@@ -3,6 +3,7 @@ package com.smieciolapp.Fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,30 +42,29 @@ import com.smieciolapp.data.model.ScanBarcode;
 import com.smieciolapp.data.model.Category;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 // TO DO waga nie przyjmuje wartosci po przecinku
 
-public class AddProduct extends Fragment  implements View.OnClickListener {
+public class AddProduct extends Fragment {
     EditText NameProduct, WeightProduct;
     Button addProduct;
     FirebaseAuth fAuth;
-    TextView barcodeTextView;
+    EditText barcodeTextView;
     FirebaseFirestore db;
     DatabaseReference Product_Ref;
     CollectionReference collectionReference;
     Button scanProd;
-    Spinner dropDownCategory;
+    ListView dropDownCategory;
+    EditText etCategory;
     String dropDownSelect;
+    //adapter dla produktów
+    ArrayAdapter<String> adapter;
     boolean exist=false;
 
     public AddProduct() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -78,8 +79,8 @@ public class AddProduct extends Fragment  implements View.OnClickListener {
         barcodeTextView = view.findViewById(R.id.barcodeExist);
         dropDownCategory = view.findViewById(R.id.spCategory);
         addProduct = view.findViewById(R.id.addButton);
-        addProduct.setOnClickListener(this);
         scanProd = (Button) view.findViewById(R.id.scanProd);
+        etCategory = view.findViewById(R.id.etCategory);
 
         fAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -88,22 +89,50 @@ public class AddProduct extends Fragment  implements View.OnClickListener {
         collectionReference = db.collection("category");
 
 
+        //adapter drop down lista nazw
+        List<String> spinnerArray = new ArrayList<String>();
 
-        List<Category> categories = new ArrayList<>();
+        adapter = new ArrayAdapter<>(Objects.requireNonNull(getContext()), android.R.layout.simple_list_item_1, spinnerArray);
+
+        dropDownCategory.setAdapter(adapter);
 
         //pobranie z bazy kategorii
         collectionReference.get().addOnSuccessListener(queryDocumentSnapshots -> {
             if(!queryDocumentSnapshots.isEmpty()){
-                for(DocumentSnapshot snapshot:queryDocumentSnapshots)
-                    categories.add(snapshot.toObject(Category.class));
+                for(DocumentSnapshot snapshot:queryDocumentSnapshots){
+                    Category category = snapshot.toObject(Category.class);
+                    spinnerArray.add(category.getName());
+                    adapter.notifyDataSetChanged();
+                    dropDownCategory.invalidateViews();
+                }
+
             }
         }).addOnFailureListener(e -> Toast.makeText(AddProduct.this.getActivity().getApplicationContext(), "Pobieranie z bazy nie powiodło się", Toast.LENGTH_SHORT).show());
 
 
+        dropDownCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Object item = adapterView.getItemAtPosition(i);
+                if (item != null) {
+                    Toast.makeText(getActivity().getApplicationContext(),"Wybrałeś " + item.toString(),
+                            Toast.LENGTH_SHORT).show();
+                    etCategory.setText(item.toString());
+                }
+
+            }
+        });
+
         dropDownCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                dropDownSelect = adapterView.getItemAtPosition(i).toString();
+                Object item = adapterView.getItemAtPosition(i);
+                if (item != null) {
+                    Toast.makeText(getActivity().getApplicationContext(), item.toString(),
+                            Toast.LENGTH_SHORT).show();
+                }
+                Toast.makeText(getActivity().getApplicationContext(), "Selected",
+                        Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -112,22 +141,25 @@ public class AddProduct extends Fragment  implements View.OnClickListener {
             }
         });
 
+
         // on click skanuj produkt
         scanProd.setOnClickListener(view1 -> {
             ScanBarcode scanBarcode = new ScanBarcode();
             scanBarcode.scanBarcode(getActivity(),AddProduct.this);
         });
 
-
-        //adapter do kategorii
-        ArrayAdapter<Category> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, categories);
-        dropDownCategory.setAdapter(adapter);
+        addProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addproduct();
+            }
+        });
 
         return view;
 
     }
 
-    private boolean hasValidationErrors(String name, String weight) {
+    private boolean hasValidationErrors(String name, String weight, boolean exist, String barcode) {
         if (name.isEmpty()) {
             NameProduct.setError("Wpisz nazwę produktu");
             NameProduct.requestFocus();
@@ -138,6 +170,9 @@ public class AddProduct extends Fragment  implements View.OnClickListener {
             WeightProduct.requestFocus();
             return true;
         }
+
+
+
         return false;
     }
 
@@ -146,17 +181,18 @@ public class AddProduct extends Fragment  implements View.OnClickListener {
 
         String name = NameProduct.getText().toString();
         String weight = WeightProduct.getText().toString();
-        String barcode;
-        String category = dropDownSelect;
+        String barcode = barcodeTextView.getText().toString();
+        String category = etCategory.getText().toString();
 
 
-        if (!hasValidationErrors(name, weight)) {
+        if (!hasValidationErrors(name, weight, exist, barcode)) {
             name = NameProduct.getText().toString();
             weight = WeightProduct.getText().toString();
             barcode = barcodeTextView.getText().toString();
 
+
             if(!exist) {
-                Product products = new Product(barcode, name, Double.parseDouble(weight), true, barcode, category);
+                Product products = new Product(barcode, name, Double.parseDouble(weight), false, barcode, category);
                 Product_Ref.push().setValue(products);
                 Toast.makeText(AddProduct.this.getActivity().getApplicationContext(), "Produkt został dodany i czeka na akceptacje", Toast.LENGTH_SHORT).show();
             } else
@@ -165,10 +201,7 @@ public class AddProduct extends Fragment  implements View.OnClickListener {
         }
     }
 
-        @Override
-        public void onClick (View v){
-            addproduct();
-        }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -178,17 +211,25 @@ public class AddProduct extends Fragment  implements View.OnClickListener {
             if(result.getContents() != null){
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Rezultat skanowania");
-                builder.setMessage("test");
-                barcodeTextView.setText(result.getContents());
+                builder.setMessage(result.getContents());
                 ScanBarcode scanBarcode = new ScanBarcode();
-                scanBarcode.checkIfProductExists(result.getContents(), exist -> {
-                    if(exist){
+                scanBarcode.checkIfProductExists(result.getContents(), exista -> {
+                    System.out.println("Exist " + exista);
+                    if(exista){
+                        System.out.println("exist?" + exista);
                         builder.setMessage("Podany produkt istnieje już w naszej bazie");
+                        barcodeTextView.setText("Produkt istnieje");
+                        barcodeTextView.setTextColor(Color.parseColor("#FF0000"));
+                        addProduct.setBackgroundColor(Color.parseColor("#FF0000"));
+                        addProduct.setEnabled(false);
+
                         Toast.makeText(AddProduct.this.getActivity().getApplicationContext(), "Podany produkt istnieje już w bazie", Toast.LENGTH_SHORT).show();
-                        barcodeTextView.setText("Podany produkt istnieje w bazie");
                         exist = true;
-                    } else {
-                        barcodeTextView.setText("Dodałeś poprawnie kod kreskowy");
+                    } else if(!exista){
+                        System.out.println("elseexist?" + exista);
+                        addProduct.setEnabled(true);
+                        addProduct.setBackgroundColor(Color.parseColor("#4BB6AF"));
+                        barcodeTextView.setText(result.getContents());
                         builder.setMessage("Dodałeś produkt do bazy. Dzięki !");
                     }
                 });

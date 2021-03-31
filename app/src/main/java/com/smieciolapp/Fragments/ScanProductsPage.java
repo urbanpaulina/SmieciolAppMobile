@@ -102,7 +102,7 @@ public class ScanProductsPage extends Fragment {
         takePic = (Button) view.findViewById(R.id.takePhoto);
         textFromPic = (TextView) view.findViewById(R.id.recognizedText);
         searchView = (SearchView) view.findViewById(R.id.searchView);
-        prodList = (ListView) view.findViewById(R.id.prodList);
+        prodList = (ListView) view.findViewById(R.id.spCategory);
         shoppingList = (ListView) view.findViewById(R.id.shoppingList);
         sumOfPlasticWeight = (TextView) view.findViewById(R.id.sumOfPlasticWeight);
         scanProduct = (Button) view.findViewById(R.id.scanProduct);

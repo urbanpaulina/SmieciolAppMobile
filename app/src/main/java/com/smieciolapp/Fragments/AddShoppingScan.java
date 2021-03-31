@@ -77,7 +77,7 @@ public class AddShoppingScan extends Fragment {
         requestPermissions(permissions, requestCode);
 
         searchView = (SearchView) view.findViewById(R.id.searchView);
-        prodList = (ListView) view.findViewById(R.id.prodList);
+        prodList = (ListView) view.findViewById(R.id.spCategory);
         sumOfPlasticWeight = (TextView) view.findViewById(R.id.plasticSum);
         scanProduct = (ImageView) view.findViewById(R.id.imageScan);
         shoppingList = (ListView) view.findViewById(R.id.shoppingList);

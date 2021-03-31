@@ -72,7 +72,7 @@
 
 
     <ListView
-        android:id="@+id/prodList"
+        android:id="@+id/spCategory"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/searchView"
@@ -87,7 +87,7 @@
         android:id="@+id/lista_produ2"
         android:layout_width="402.65dp"
         android:layout_height="34dp"
-        android:layout_below="@+id/prodList"
+        android:layout_below="@+id/spCategory"
         android:layout_alignParentStart="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"

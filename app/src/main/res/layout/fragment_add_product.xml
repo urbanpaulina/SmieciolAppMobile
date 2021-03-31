@@ -1,202 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical"
-    tools:context=".Fragments.AddProduct">
-
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#FFFFFF">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#FFFFFF">
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                tools:context=".Fragments.AddProduct">
 
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:text="Dodaj produkt"
-                    android:textColor="@color/darkGray"
-                    android:textSize="40sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/txt_Name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/textView15"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:inputType="text"
+        android:padding="10dp"
+        android:textColor="@color/darkGray"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/txt_Name"
-                    android:layout_width="212dp"
-                    android:layout_height="41dp"
-                    android:layout_marginStart="70dp"
-                    android:layout_marginTop="88dp"
-                    android:layout_marginEnd="179dp"
-                    android:text="Nazwa"
-                    android:textColor="@color/darkGray"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.32"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/txt_Name"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/textView15"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Nazwa"
+        android:textColor="@color/darkGray"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:background="@drawable/border_for_textview"/>
 
-                <EditText
-                    android:id="@+id/etName"
-                    android:layout_width="279dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="70dp"
-                    android:layout_marginEnd="112dp"
-                    android:inputType="text"
-                    android:padding="10dp"
-                    android:textColor="@color/darkGray"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.323"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_Name" />
+    <TextView
+        android:id="@+id/txtWeight"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/txt_Name"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="179dp"
+        android:gravity="center"
+        android:inputType="numberDecimal|numberSigned"
+        android:text="Waga (kg)"
+        android:textColor="@color/darkGray"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:background="@drawable/border_for_textview"/>
 
-                <TextView
-                    android:id="@+id/txtWeight"
-                    android:layout_width="212dp"
-                    android:layout_height="41dp"
-                    android:layout_marginStart="70dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginEnd="179dp"
-                    android:inputType="numberDecimal|numberSigned"
-                    android:text="Waga (kg)"
-                    android:textColor="@color/darkGray"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.323"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etName" />
+    <EditText
+        android:id="@+id/etWeight"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/etName"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:inputType="numberDecimal|numberSigned"
+        android:padding="10dp"
+        android:textColor="@color/darkGray"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
 
-                <EditText
-                    android:id="@+id/etWeight"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="70dp"
-                    android:layout_marginEnd="245dp"
-                    android:inputType="numberDecimal|numberSigned"
-                    android:padding="10dp"
-                    android:textColor="@color/darkGray"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.305"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtWeight" />
+    <TextView
+        android:id="@+id/txtCategory"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/scanProd"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="179dp"
+        android:background="@drawable/border_for_textview"
+        android:gravity="center"
+        android:text="Kategoria"
+        android:textColor="@color/darkGray"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/txtBarcode"
-                    android:layout_width="212dp"
-                    android:layout_height="41dp"
-                    android:layout_marginStart="70dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginEnd="179dp"
-                    android:text="Kod kreskowy"
-                    android:textColor="@color/darkGray"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.323"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etWeight" />
+    <Button
+        android:id="@+id/scanProd"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/txtWeight"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/smieciolGreen"
+        android:text="Kod kreskowy"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/txtCategory"
-                    android:layout_width="212dp"
-                    android:layout_height="41dp"
-                    android:layout_marginStart="70dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="179dp"
-                    android:text="Kategoria"
-                    android:textColor="@color/darkGray"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.32"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/scanProd" />
+    <EditText
+        android:id="@+id/barcodeExist"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/etWeight"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="40dp"
+        android:focusable="false"
+        android:inputType="numberDecimal|numberSigned"
+        android:padding="10dp"
+        android:textColor="@color/darkGray"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-                <Spinner
-                    android:id="@+id/spCategory"
-                    android:layout_width="212dp"
-                    android:layout_height="42dp"
-                    android:layout_marginStart="56dp"
-                    android:layout_marginTop="8dp"
-                    android:backgroundTintMode="add"
-                    android:hapticFeedbackEnabled="true"
-                    android:spinnerMode="dropdown"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtCategory" />
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="298dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="12dp"
+        android:text="Dodaj produkt"
+        android:textColor="@color/darkGray"
+        android:textSize="40sp"
+        android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/addButton"
-                    android:layout_width="120dp"
-                    android:layout_height="43dp"
-                    android:layout_marginStart="140dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="140dp"
-                    android:background="@drawable/corners"
-                    android:enabled="true"
-                    android:text="Dodaj produkt"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:backgroundTint="@color/smieciolGreen"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.185"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/spCategory" />
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/barcodeExist"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="37dp"
+        android:backgroundTint="@color/smieciolGreen"
+        android:text="Dodaj"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
 
-                <Button
-                    android:id="@+id/scanProd"
-                    android:layout_width="120dp"
-                    android:layout_height="43dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Skanuj"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:backgroundTint="@color/smieciolGreen"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.185"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtBarcode" />
+    <ListView
+        android:id="@+id/spCategory"
+        android:layout_width="188dp"
+        android:layout_height="226dp"
+        android:layout_below="@+id/txtCategory"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="41dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="215dp"
+        android:background="@drawable/border_for_textview" />
 
-                <TextView
-                    android:id="@+id/barcodeExist"
-                    android:layout_width="188dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="16dp"
-                    android:gravity="center"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.276"
-                    app:layout_constraintStart_toEndOf="@+id/scanProd"
-                    app:layout_constraintTop_toBottomOf="@+id/txtBarcode" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
-    </ScrollView>
+    <EditText
+        android:id="@+id/etCategory"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/barcodeExist"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="40dp"
+        android:ems="10"
+        android:focusable="false" />
 
 </RelativeLayout>
