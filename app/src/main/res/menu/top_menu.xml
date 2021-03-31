@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view2"
     android:checkableBehavior="single">
@@ -7,12 +8,13 @@
         android:id="@+id/Profil"
         android:fontFamily="sans-serif-black"
         android:background="@drawable/menu_rounded"
-        android:title="Mój profil" />
+        android:title="Moje konto" />
 
     <item
         android:id="@+id/wyloguj"
         android:fontFamily="sans-serif-black"
         android:background="@drawable/menu_rounded"
-        android:title="Wyloguj" />
+
+        android:title="Wyloguj się" />
 
 </menu>
