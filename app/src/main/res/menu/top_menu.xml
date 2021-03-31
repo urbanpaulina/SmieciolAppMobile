@@ -6,15 +6,13 @@
     <item
         android:id="@+id/Profil"
         android:fontFamily="sans-serif-black"
-        android:icon="@drawable/home_icon"
-        android:textColor="#2D2B2B"
+        android:background="@drawable/menu_rounded"
         android:title="Mój profil" />
 
     <item
         android:id="@+id/wyloguj"
         android:fontFamily="sans-serif-black"
-        android:icon="@drawable/home_icon"
-        android:textColor="#2D2B2B"
+        android:background="@drawable/menu_rounded"
         android:title="Wyloguj" />
 
 </menu>

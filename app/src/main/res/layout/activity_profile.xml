@@ -10,22 +10,28 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
-        android:id="@+id/moje_konto"
-        android:layout_width="320dp"
-        android:layout_height="39dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="40dp"
-        android:gravity="center_horizontal|top"
-        android:text="Moje konto"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/moje_konto"
+            android:layout_width="249dp"
+            android:layout_height="38dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="80dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center_horizontal|top"
+            android:text="Moje konto"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="36dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -61,7 +67,7 @@
             android:layout_below="@+id/button4"
             android:layout_alignBottom="@+id/znajomi"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="179dp"
+            android:layout_marginTop="190dp"
             android:layout_marginBottom="-56dp"
             android:background="@drawable/sechview_rounded"
             android:text="Szukaj znajomych"
@@ -78,6 +84,7 @@
             android:layout_marginTop="29dp"
             android:layout_marginEnd="276dp"
             android:background="@drawable/button"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:text="Edytuj profil"
             android:textSize="18dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -88,6 +95,7 @@
             android:layout_width="250dp"
             android:layout_height="20dp"
             android:layout_below="@+id/moje_konto"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:layout_marginStart="15dp"
             android:layout_marginTop="23dp"
             android:layout_toEndOf="@+id/imageView2" />
@@ -95,6 +103,7 @@
         <TextView
             android:id="@+id/firstName"
             android:layout_width="150dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:layout_height="20dp"
             android:layout_below="@+id/userName"
             android:layout_marginStart="40dp"
@@ -106,6 +115,7 @@
             android:layout_width="150dp"
             android:layout_height="20dp"
             android:layout_below="@+id/firstName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:layout_marginStart="40dp"
             android:layout_marginTop="18dp"
             android:layout_toEndOf="@+id/imageView2" />
