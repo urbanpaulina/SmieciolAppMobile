@@ -19,11 +19,13 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
 import com.smieciolapp.R;
 import com.smieciolapp.autentication.FirebaseAuthClass;
+import com.smieciolapp.autentication.login.LoginActivity;
 import com.smieciolapp.data.model.User;
 
 public class ProfilePage extends AppCompatActivity {
 
     TextView fName, sName, uName, Email;
+    Button btn;
 
     FirebaseAuthClass authClass = new FirebaseAuthClass();
 
@@ -36,6 +38,8 @@ public class ProfilePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        btn = (Button)findViewById(R.id.back);
 
 
         //pobranie usera z inteta
@@ -51,9 +55,31 @@ public class ProfilePage extends AppCompatActivity {
        if(user != null && user.getType()==2) {
 
            if(!isAdmin)
+           {
                setContentView(R.layout.activity_profile);
+
+               btn = findViewById(R.id.back);
+               btn.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       Intent intent = new Intent(ProfilePage.this, MainPage.class);
+                       startActivity(intent);
+                   }
+               });
+
+           }
            else
                setContentView(R.layout.activity_profile_user_admin);
+
+
+           btn = findViewById(R.id.back);
+           btn.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   Intent intent = new Intent(ProfilePage.this, MainPage.class);
+                   startActivity(intent);
+               }
+           });
 
            uName = findViewById(R.id.userName);
            fName = findViewById(R.id.firstName);
@@ -63,7 +89,6 @@ public class ProfilePage extends AppCompatActivity {
            uName.setText("Nazwa użytkownika:" + user.getUserName());
            fName.setText("Imię: "+ user.getFirstName());
            sName.setText("Nazwisko: "+user.getLastName());
-
 
        }
        // jesli admin ...

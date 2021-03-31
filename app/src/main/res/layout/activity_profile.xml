@@ -14,12 +14,12 @@
         <TextView
             android:id="@+id/moje_konto"
             android:layout_width="249dp"
-            android:layout_height="38dp"
+            android:layout_height="50dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="80dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="35dp"
             android:layout_marginEnd="80dp"
             android:fontFamily="sans-serif"
             android:gravity="center_horizontal|top"
@@ -33,92 +33,116 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="106dp"
-            android:layout_height="118dp"
-            android:layout_below="@+id/moje_konto"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="17dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/moje_konto"
-            app:srcCompat="@drawable/user" />
+
+        <!-- Circular Image View  -->
 
         <TextView
-        android:id="@+id/znajomi"
-        android:layout_width="437dp"
-        android:layout_height="31dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="324dp"
-        android:background="@drawable/border_for_textview"
-        android:gravity="center_horizontal|top"
-        android:text="Znajomi"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.551"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/znajomi"
+            android:layout_width="437dp"
+            android:layout_height="31dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="294dp"
+            android:background="@drawable/border_for_textview"
+            android:gravity="center_horizontal|top"
+            android:text="Znajomi"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.551"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <SearchView
             android:id="@+id/search"
             android:layout_width="308dp"
-            android:layout_height="34dp"
-            android:layout_below="@+id/button4"
-            android:layout_alignBottom="@+id/znajomi"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="190dp"
-            android:layout_marginBottom="-56dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/znajomi"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/sechview_rounded"
             android:text="Szukaj znajomych"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/znajomi" />
+            app:layout_constraintTop_toBottomOf="@+id/znajomi">
+
+        </SearchView>
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/edit"
             android:layout_width="129dp"
             android:layout_height="32dp"
-            android:layout_below="@+id/imageView2"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="29dp"
-            android:layout_marginEnd="276dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="220dp"
+            android:layout_marginEnd="260dp"
             android:background="@drawable/button"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:text="Edytuj profil"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="18dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/userName"
-            android:layout_width="230dp"
-            android:layout_height="20dp"
+            android:layout_width="240dp"
+            android:layout_height="25dp"
             android:layout_below="@+id/moje_konto"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="23dp"
-            android:layout_toEndOf="@+id/imageView2" />
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="20dp"
+            android:textSize="18dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/firstName"
             android:layout_width="150dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:layout_height="20dp"
+            android:layout_height="25dp"
             android:layout_below="@+id/userName"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="11dp"
-            android:layout_toEndOf="@+id/imageView2" />
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="8dp"
+            android:textSize="18dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/lastName"
             android:layout_width="150dp"
-            android:layout_height="20dp"
+            android:layout_marginStart="160dp"
+            android:layout_height="25dp"
             android:layout_below="@+id/firstName"
+            android:layout_marginTop="8dp"
+            android:textSize="18dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="121dp"
+            android:layout_height="116dp"
+            android:layout_below="@+id/moje_konto"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/image"
+            app:civ_border_color="#FF000000"
+            app:srcCompat="@drawable/user" />
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="60dp"
+            android:layout_height="22dp"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/button"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="340dp"
+            android:textAlignment="center"
+            android:textSize="15dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="18dp"
-            android:layout_toEndOf="@+id/imageView2" />
+            android:text="Powrót" />
+
+        <ImageButton
+            android:id="@+id/plus"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/znajomi"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/search"
+            android:background="@drawable/plus" />
 
 
     </RelativeLayout>
