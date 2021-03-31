@@ -92,11 +92,11 @@
 
         <TextView
             android:id="@+id/userName"
-            android:layout_width="250dp"
+            android:layout_width="230dp"
             android:layout_height="20dp"
             android:layout_below="@+id/moje_konto"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="23dp"
             android:layout_toEndOf="@+id/imageView2" />
 
