@@ -62,19 +62,27 @@ public class ScanBarcode extends CaptureActivity {
         db.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                boolean founded = false;
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     System.out.println(snapshot.getValue());
                     try{
                         Product prod = (Product)snapshot.getValue(Product.class);
                         if(prod.getBarcode().equals(barcode)) {
+                            founded = true;
                             checkCallback.onCallback(prod.getBarcode().equals(barcode));
                         }
-
-
                     } catch (Exception e) {
                         System.out.println("Nie dodano " + snapshot.getValue(Product.class));
                     }
                 }
+                if(!founded){
+                    try{
+                        checkCallback.onCallback(false);
+                    }catch (Exception e){
+                        //do nothing
+                    }
+                }
+
             }
 
             @Override
