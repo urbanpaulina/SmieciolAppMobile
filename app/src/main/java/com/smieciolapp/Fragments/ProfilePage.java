@@ -76,7 +76,7 @@ public class ProfilePage extends AppCompatActivity {
            btn.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
-                   Intent intent = new Intent(ProfilePage.this, MainPage.class);
+                   Intent intent = new Intent(ProfilePage.this, MenuMainPage.class);
                    startActivity(intent);
                }
            });
