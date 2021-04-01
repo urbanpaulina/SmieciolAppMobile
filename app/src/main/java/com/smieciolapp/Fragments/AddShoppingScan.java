@@ -36,8 +36,12 @@ import com.smieciolapp.data.model.Product;
 import com.smieciolapp.data.model.ScanBarcode;
 
 import java.lang.reflect.Type;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -52,6 +56,8 @@ public class AddShoppingScan extends Fragment {
     Button confirmShopping;
     double sumOfWeight=0;
     private final String [] permissions = {"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.ACCESS_FINE_LOCATION", "android.permission.READ_PHONE_STATE", "android.permission.SYSTEM_ALERT_WINDOW","android.permission.CAMERA"};
+    ArrayList<String> messagesToBuilder;
+
 
     //baza
     DatabaseReference db = FirebaseDatabase.getInstance().getReference("Products");
@@ -65,6 +71,8 @@ public class AddShoppingScan extends Fragment {
     //adapter dla produktów
     ArrayAdapter<Product> prodAdapter;
     ArrayAdapter<Product> shoppingAdapter;
+    DecimalFormat df = new DecimalFormat("#.###");
+    Locale locale  = new Locale("en", "UK");
 
 
     @Override
@@ -83,18 +91,36 @@ public class AddShoppingScan extends Fragment {
         shoppingList = (ListView) view.findViewById(R.id.shoppingList);
         confirmShopping = (Button) view.findViewById(R.id.confirmShopping);
         scanBarcode = new ScanBarcode();
+        df.setRoundingMode(RoundingMode.CEILING);
 
         //lista
         products = new ArrayList<>();
+        messagesToBuilder = new ArrayList<>();
 
         //zapisany stan listy zakupów - shoppingList
-        shoppingProducts = loadPreviousShoppingList();
-        sumOfPlasticWeight.setText(loadPreviousPlasticValue());
         try{
-            sumOfWeight = Float.parseFloat(loadPreviousPlasticValue());
-        } catch (Exception e) {
-            sumOfWeight = 0.0;
+            shoppingProducts = loadPreviousShoppingList();
+        }catch (Exception e){
+            //nothing
         }
+
+
+        try{
+            System.out.println("wczesniej " + loadPreviousPlasticValue());
+            double temp = Float.parseFloat(loadPreviousPlasticValue());
+            System.out.println("temp" + temp);
+            temp = Math.round(temp * 1000.0) / 1000.0;
+            sumOfWeight = temp;
+            sumOfPlasticWeight.setText(String.valueOf(sumOfWeight));
+            System.out.println("StartSumofweight" + sumOfWeight);
+        } catch (Exception e){
+            Toast.makeText(getContext(), "Błąd ładowania listy produktów. Wyczyszczono schowek." , Toast.LENGTH_LONG).show();
+            SharedPreferences settings = Objects.requireNonNull(getActivity()).getSharedPreferences("SHOPPING_LIST_SAVED", Context.MODE_PRIVATE);
+            settings.edit().clear().apply();
+        }
+
+
+
 
         //adapter
         prodAdapter = new ArrayAdapter<>(Objects.requireNonNull(getContext()), android.R.layout.simple_list_item_1, products);
@@ -179,7 +205,7 @@ public class AddShoppingScan extends Fragment {
             hideRecommendedOptions(prodList);
 
             //zmiana stanu obecnej wagi
-            sumOfWeight+= Objects.requireNonNull(prodAdapter.getItem(position)).getWeight();
+            sumOfWeight+=prodAdapter.getItem(position).getWeight();
             sumOfPlasticWeight.setText(String.valueOf(sumOfWeight));
 
             //zapisanie obecnego stanu produktów i wagi
@@ -231,7 +257,7 @@ public class AddShoppingScan extends Fragment {
         Gson gson = new Gson();
         String jsonShoppingList = gson.toJson(shoppingProducts);
         editor.putString("SHOPPING_LIST", jsonShoppingList);
-        editor.putString("PLASTIC_WEIGHT", sumOfPlasticWeight.getText().toString());
+        editor.putString("PLASTIC_WEIGHT", String.valueOf(sumOfWeight));
         editor.apply();
     }
 
@@ -257,6 +283,7 @@ public class AddShoppingScan extends Fragment {
         String plasticWeightJson;
         try{
             plasticWeightJson = sharedPreferences.getString("PLASTIC_WEIGHT",null);
+
         }catch (Exception e){
             return "";
         }
@@ -277,33 +304,41 @@ public class AddShoppingScan extends Fragment {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result!=null){
             if(result.getContents() != null){
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage(result.getContents());
+
+                builder.setMessage("Kod kreskowy produktu: " + result.getContents());
 
                     //dodanie zeskanowanego produktu do listy produktów
                     scanBarcode.findBarcodeinDatabase(result.getContents(), product -> {
-                        shoppingProducts.add(product);
+                        if(product!=null){
+                            shoppingProducts.add(product);
+                            messagesToBuilder.add(product.getName());
+                            builder.setMessage(messagesToBuilder.get(messagesToBuilder.size()-1));
+                            //poszerzenie listView
+                            setListViewHeightBasedOnChildren(shoppingList);
+                            //zmiana stanu obecnej wagi
+                            sumOfWeight += product.getWeight();
+                            sumOfPlasticWeight.setText(String.valueOf(sumOfWeight));
+                            Toast.makeText(getContext(), "Dodaliśmy " + product.getName() + " do listy zakupów", Toast.LENGTH_LONG).show();
+                            //zapisanie obecnego stanu produktów
+                            saveCurrentShoppingList();
 
-                        //poszerzenie listView
-                        setListViewHeightBasedOnChildren(shoppingList);
-
-                        //zmiana stanu obecnej wagi
-                        sumOfWeight+=product.getWeight();
-                        sumOfPlasticWeight.setText(String.valueOf(sumOfWeight));
-
-                        //zapisanie obecnego stanu produktów
-                        saveCurrentShoppingList();
-
-                        //odświeżanie dynamiczne listy
-                        shoppingAdapter.notifyDataSetChanged();
-                        shoppingList.invalidateViews();
+                            //odświeżanie dynamiczne listy
+                            shoppingAdapter.notifyDataSetChanged();
+                            shoppingList.invalidateViews();
+                        } else {
+                            messagesToBuilder.add("Nie mamy podanego produktu w bazie. Może chcesz go dodać? :)");
+                            builder.setMessage(messagesToBuilder.get(messagesToBuilder.size()-1));
+                            Toast.makeText(getContext(), "Nie mamy podanego produktu w bazie. Może chcesz go dodać? :)", Toast.LENGTH_LONG).show();
+                        }
                     });
 
                         builder.setTitle("Rezultat skanowania");
                         builder.setPositiveButton("To nie to, skanuj ponownie", (dialog, which) ->
                         scanBarcode.scanBarcode(getActivity(),AddShoppingScan.this)).
                         setNegativeButton("Ok", (dialog, which) ->
-                                Toast.makeText(getContext(), "Dodałeś produkt", Toast.LENGTH_LONG).show());
+                                Toast.makeText(getContext(), "", Toast.LENGTH_LONG).show());
                                 AlertDialog dialog = builder.create();
                                 dialog.show();
             }

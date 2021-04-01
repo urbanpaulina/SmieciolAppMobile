@@ -41,7 +41,7 @@
 
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="117dp"
+        android:layout_marginStart="118dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="118dp"
         android:clickable="true"
@@ -49,6 +49,7 @@
         android:contextClickable="true"
         android:focusable="true"
         android:focusableInTouchMode="true"
+        android:foregroundGravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lista_produ2"
@@ -75,7 +76,7 @@
     <ListView
         android:id="@+id/spCategory"
         android:layout_width="330dp"
-        android:layout_height="wrap_content"
+        android:layout_height="3dp"
         android:layout_below="@+id/searchView"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
@@ -92,6 +93,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/border_for_textview"
         android:gravity="center_horizontal|top"
         android:text="Lista produktów"
@@ -99,7 +101,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.625"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+        app:layout_constraintTop_toBottomOf="@+id/spCategory" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -112,8 +114,9 @@
 
         <TextView
             android:id="@+id/textView14"
-            android:layout_width="0dp"
+            android:layout_width="127dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:gravity="center"
             android:text="Ilość plastiku:"
@@ -122,16 +125,24 @@
 
         <TextView
             android:id="@+id/plasticSum"
-            android:layout_width="103dp"
+            android:layout_width="104dp"
             android:layout_height="match_parent"
+            android:gravity="center_vertical|end"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center"
-            android:textAlignment="center"
-            android:textSize="22sp" />
+            android:text="kg" />
 
         <Button
             android:id="@+id/confirmShopping"
             android:layout_width="122dp"
             android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
             android:backgroundTint="@color/smieciolGreen"
             android:fadingEdge="horizontal|vertical"
             android:fadingEdgeLength="5sp"
@@ -152,7 +163,7 @@
     <ListView
         android:id="@+id/shoppingList"
         android:layout_width="330dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/lista_produ2"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"

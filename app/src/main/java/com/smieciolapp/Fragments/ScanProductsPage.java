@@ -51,13 +51,15 @@ import com.smieciolapp.data.model.ScanBarcode;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
 public class ScanProductsPage extends Fragment {
-
+/*
     ImageView imageView;
     Button takePic;
     Button scanProduct;
@@ -86,12 +88,12 @@ public class ScanProductsPage extends Fragment {
     ArrayAdapter<Product> prodAdapter;
     ArrayAdapter<Product> shoppingAdapter;
 
-
+*/
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_scan, container, false);
-
+/*
 
         int requestCode = 200;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -127,6 +129,7 @@ public class ScanProductsPage extends Fragment {
                         Product prod = (Product)snapshot.getValue(Product.class);
                         products.add(prod);
                     } catch (Exception e) {
+                        System.out.println(e);
                         System.out.println("Nie dodano " + snapshot.getValue(Product.class));
                     }
                 }
@@ -167,11 +170,8 @@ public class ScanProductsPage extends Fragment {
         prodList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println(prodAdapter.getItem(position));
-                shoppingProducts.add(prodAdapter.getItem(position));
-                sumOfWeight+=prodAdapter.getItem(position).getWeight();
-                sumOfPlasticWeight.setText(String.valueOf(sumOfWeight));
-                sumOfPlasticWeight.append(" kg");
+
+
                 // odświeżanie dynamiczne
                 shoppingAdapter.notifyDataSetChanged();
                 shoppingList.invalidateViews();
@@ -187,10 +187,12 @@ public class ScanProductsPage extends Fragment {
                 dispatchTakePictureIntent();
             }
         });
-
+*/
         return view;
     }
 
+
+/*
 
     //////////////////////////////////////////////////////////////////////////
 
@@ -233,15 +235,16 @@ public class ScanProductsPage extends Fragment {
         File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
+               // ".jpg",         /* suffix */
+             //   storageDir      /* directory */
+       // );
 
         // Save a file: path for use with ACTION_VIEW intents
-        currentPhotoPath = image.getAbsolutePath();
-        return image;
-    }
+    //    currentPhotoPath = image.getAbsolutePath();
+      //  return image;
+  //  }
 
+    /*
 
     private  Bitmap rotateImage(Bitmap bitmap){
         ExifInterface exifInterface = null;
@@ -385,5 +388,5 @@ public class ScanProductsPage extends Fragment {
     }
 
 
-
+*/
 }

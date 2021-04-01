@@ -45,8 +45,6 @@ import java.util.List;
 import java.util.Objects;
 
 
-// TO DO waga nie przyjmuje wartosci po przecinku
-
 public class AddProduct extends Fragment {
     EditText NameProduct, WeightProduct;
     Button addProduct;
@@ -58,7 +56,6 @@ public class AddProduct extends Fragment {
     Button scanProd;
     ListView dropDownCategory;
     EditText etCategory;
-    String dropDownSelect;
     //adapter dla produktów
     ArrayAdapter<String> adapter;
     boolean exist=false;
