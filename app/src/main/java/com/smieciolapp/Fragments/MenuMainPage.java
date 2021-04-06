@@ -44,7 +44,6 @@ public class MenuMainPage extends AppCompatActivity  {
 
 
         Toolbar toolbar=findViewById(R.id.toolbar);
-
         //toolbar
         setSupportActionBar(toolbar);
 
@@ -55,7 +54,6 @@ public class MenuMainPage extends AppCompatActivity  {
         //inicjalizacja usera
 
         user = getUserFromFirestore(email);
-
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
@@ -128,19 +126,15 @@ public class MenuMainPage extends AppCompatActivity  {
                     break;
                 case R.id.Scan_Recipt:
                     selectedFragment = new ScanProductsPage();
-                    //getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new ScanProductsPage()).commit();
                     break;
                 case R.id.My_Shoppings:
                     selectedFragment = new AddShoppingScan();
-                    //selectedFragment = new ScanProductsPage();
                     break;
                 case R.id.Add_Product:
                     selectedFragment = new AddProduct();
-                    //getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new AddProductAdmin()).commit();
                     break;
                 case R.id.Ranking:
                     selectedFragment = new StatsPage();
-                    //getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container,new StatsPage()).commit();
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_container, selectedFragment).commit();

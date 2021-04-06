@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -57,22 +58,14 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText username = findViewById(R.id.username);
         final TextView error = findViewById(R.id.error);
         final TextView errorUsername = findViewById(R.id.errorUsername);
-        final TextView zaloz_konto = findViewById(R.id.zaloz_konto);
-        final TextView Imie = findViewById(R.id.Imie);
-        final TextView Nazwisko = findViewById(R.id.Nazwisko);
-        final TextView Nazwa_uzytk = findViewById(R.id.Nazwa_uzytk);
-        final TextView Email = findViewById(R.id.Email);
-        final TextView Password = findViewById(R.id.Password);
-        final TextView Potwierdz = findViewById(R.id.Potwierdz);
         final TextView Konto_istnieje = findViewById(R.id.Konto_istnieje);
-        final TextView zaloguj_sie = findViewById(R.id.zaloguj_sie);
-        zaloguj_sie.setPaintFlags(zaloguj_sie.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+        final TextView logIn = findViewById(R.id.logIn);
+        logIn.setPaintFlags(logIn.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         final ImageView segregacja2 = findViewById(R.id.segregacja2);
-
 
         //pola akcji
         final Button registerButton = findViewById(R.id.register);
-        final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+        final ProgressBar progressBar = findViewById(R.id.progresBar);
 
 
         //walidacja maila
@@ -96,7 +89,6 @@ public class RegisterActivity extends AppCompatActivity {
                     errorUsername.setText("");
             }
         });
-
 
         // sprawdzenie czy hasła są takie same
         confrimPassword.addTextChangedListener(new TextWatcher() {
@@ -127,6 +119,34 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //TO DO - walidacja aby nie móc kliknąć przycisku - opcjonalnie
+                if (TextUtils.isEmpty(firstName.getText().toString().trim())) {
+                    firstName.setError("Imie jest wymagane");
+
+                }
+                if (TextUtils.isEmpty(lastName.getText().toString().trim())) {
+                    lastName.setError("Nazwisko jest wymagane");
+
+                }
+                if (TextUtils.isEmpty(emailEditText.getText().toString().trim())) {
+                    emailEditText.setError("Email jest wymagany");
+
+                }
+                if (TextUtils.isEmpty(passwordEditText.getText().toString().trim())) {
+                    passwordEditText.setError("Hasło jest wymagane");
+
+                }
+                if (TextUtils.isEmpty(confrimPassword.getText().toString().trim())) {
+                    confrimPassword.setError("Ptwierdzenie jest wymagane");
+                    return;
+                }
+
+                if (!passwordEditText.getText().toString().trim().equals(confrimPassword.getText().toString().trim()) ) {
+                    confrimPassword.setError("Hasła muszą być identyczne");
+                    return;
+                }
+
+                progressBar.setVisibility(View.VISIBLE);
+
                     authClass.signUp(emailEditText.getText().toString().trim(),passwordEditText.getText().toString().trim(),
                             firstName.getText().toString().trim(),lastName.getText().toString().trim(), username.getText().toString().trim(),2).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
@@ -144,14 +164,14 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
                             //jesli dane niepoprawne...
                             Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.INVISIBLE);
                         }
                     });
-
 
             } // onClick
         });
 
-        zaloguj_sie.setOnClickListener(new View.OnClickListener() {
+        logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));

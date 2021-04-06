@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.password);
         segregacja=findViewById(R.id.segregacja);
         loginButton = findViewById(R.id.register);
-        loadingProgressBar = findViewById(R.id.loading);
+        loadingProgressBar = findViewById(R.id.progresBar);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

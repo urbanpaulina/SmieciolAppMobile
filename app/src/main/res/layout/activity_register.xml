@@ -287,7 +287,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/register" />
 
             <TextView
-                android:id="@+id/zaloguj_sie"
+                android:id="@+id/logIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
@@ -300,20 +300,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/register" />
 
             <ProgressBar
-                android:id="@+id/loading"
-                android:layout_width="15dp"
-                android:layout_height="17dp"
+                android:id="@+id/progresBar"
+                android:layout_width="55dp"
+                android:layout_height="36dp"
                 android:layout_gravity="center"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="64dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginStart="100dp"
                 android:layout_marginBottom="64dp"
-                android:visibility="gone"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/password"
-                app:layout_constraintStart_toStartOf="@+id/password"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.3" />
+                app:layout_constraintStart_toEndOf="@+id/Email"
+                app:layout_constraintTop_toBottomOf="@+id/username"
+                app:layout_constraintVertical_bias="0.001"
+                tools:visibility="invisible" />
 
             <ImageView
                 android:id="@+id/segregacja2"

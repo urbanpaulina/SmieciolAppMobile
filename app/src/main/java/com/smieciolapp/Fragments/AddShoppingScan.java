@@ -65,6 +65,7 @@ public class AddShoppingScan extends Fragment {
     //listaProduktów
     ArrayList<Product> products;
 
+
     //list nazw produktów
     ArrayList<Product> shoppingProducts;
 
@@ -73,7 +74,6 @@ public class AddShoppingScan extends Fragment {
     ArrayAdapter<Product> shoppingAdapter;
     DecimalFormat df = new DecimalFormat("#.###");
     Locale locale  = new Locale("en", "UK");
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,6 +97,7 @@ public class AddShoppingScan extends Fragment {
         products = new ArrayList<>();
         messagesToBuilder = new ArrayList<>();
 
+
         //zapisany stan listy zakupów - shoppingList
         try{
             shoppingProducts = loadPreviousShoppingList();
@@ -112,6 +113,7 @@ public class AddShoppingScan extends Fragment {
             temp = Math.round(temp * 1000.0) / 1000.0;
             sumOfWeight = temp;
             sumOfPlasticWeight.setText(String.valueOf(sumOfWeight));
+
             System.out.println("StartSumofweight" + sumOfWeight);
         } catch (Exception e){
             Toast.makeText(getContext(), "Błąd ładowania listy produktów. Wyczyszczono schowek." , Toast.LENGTH_LONG).show();
@@ -125,8 +127,10 @@ public class AddShoppingScan extends Fragment {
         //adapter
         prodAdapter = new ArrayAdapter<>(Objects.requireNonNull(getContext()), android.R.layout.simple_list_item_1, products);
         shoppingAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, shoppingProducts);
+
         prodList.setAdapter(prodAdapter);
         shoppingList.setAdapter(shoppingAdapter);
+
 
 
         //opcjonalne poszerzenie layoutu
@@ -136,6 +140,7 @@ public class AddShoppingScan extends Fragment {
         // odświeżanie dynamiczne
         shoppingAdapter.notifyDataSetChanged();
         shoppingList.invalidateViews();
+
 
         //pobranie produktow
         db.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -198,6 +203,7 @@ public class AddShoppingScan extends Fragment {
             //dodanie produktu do listy zakupów
             shoppingProducts.add(prodAdapter.getItem(position));
 
+
             //poszerzenie listView
             setListViewHeightBasedOnChildren(shoppingList);
 
@@ -214,6 +220,7 @@ public class AddShoppingScan extends Fragment {
             // odświeżanie dynamiczne
             shoppingAdapter.notifyDataSetChanged();
             shoppingList.invalidateViews();
+
         });
 
         return view;
@@ -270,6 +277,7 @@ public class AddShoppingScan extends Fragment {
 
         // odświeżanie dynamiczne
         shoppingList.invalidateViews();
+       // weights.invalidateViews();
 
         if(shoppingProducts == null) {
             shoppingProducts = new ArrayList<>();
@@ -314,6 +322,7 @@ public class AddShoppingScan extends Fragment {
                         if(product!=null){
                             shoppingProducts.add(product);
                             messagesToBuilder.add(product.getName());
+
                             builder.setMessage(messagesToBuilder.get(messagesToBuilder.size()-1));
                             //poszerzenie listView
                             setListViewHeightBasedOnChildren(shoppingList);
